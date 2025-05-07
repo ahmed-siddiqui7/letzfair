@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -10,6 +10,9 @@ import { Button } from "../../ui/button";
 import DatePickerWithLabel from "../datepicker-label";
 import { GoArrowRight } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ContractType, useContract } from "@/mutation/get-contracts";
 
 const ContractListing = () => {
   const [fromDate, setFromDate] = useState<Date | undefined>(
@@ -18,74 +21,58 @@ const ContractListing = () => {
   const [toDate, setToDate] = useState<Date | undefined>(
     new Date("2025-02-14")
   );
-  const contracts = [
-    {
-      name: "FutureTech 2025 Contract",
-      start: "02/20/2025",
-      end: "06/30/2025",
-      projects: 1,
-    },
-    {
-      name: "AI & Automation Contract",
-      start: "07/20/2025",
-      end: "08/14/2025",
-      projects: 3,
-    },
-    {
-      name: "Global Health Talks Package",
-      start: "12/01/2024",
-      end: "01/15/2025",
-      projects: 5,
-    },
-    {
-      name: "MedConnect Conference Series",
-      start: "01/15/2025",
-      end: "03/10/2025",
-      projects: 6,
-    },
-    {
-      name: "FinVision 2025 Contract",
-      start: "06/15/2025",
-      end: "04/22/2025",
-      projects: 12,
-    },
-    {
-      name: "Global Health Talks Package",
-      start: "12/01/2024",
-      end: "01/15/2025",
-      projects: 5,
-    },
-    {
-      name: "MedConnect Conference Series",
-      start: "01/15/2025",
-      end: "03/10/2025",
-      projects: 6,
-    },
-    {
-      name: "Global Health Talks Package",
-      start: "12/01/2024",
-      end: "01/15/2025",
-      projects: 5,
-    },
-  ];
+
+  const router = useRouter();
+
+  const [contracts, setcontracts] = useState<ContractType | undefined>();
+  const [pagination, setpagination] = useState<ContractType | undefined>();
+  const [page, setPage] = useState(0);
+  const [searchValue, setsearchValue] = useState<string>("");
+
+  const { data, isLoading } = useContract({
+    page,
+    limit: 10,
+    sortBy: "",
+    sortOrder: "",
+    search: searchValue,
+    start_date: "",
+    end_date: "",
+  });
+  console.log("data....", data);
+
+  useEffect(() => {
+    if (data?.contracts) {
+      setcontracts(data.contracts);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (data?.contracts) {
+      setpagination(data.pagination);
+    }
+  }, [data]);
+
   return (
     <div className="px-4 sm:px-8 md:px-16 mt-6">
-      <h1 className="font-semibold text-xl sm:text-2xl mb-4">
+      <h1 className="font-semibold text-xl sm:text-2xl mb-4 md:text-start text-center">
         Select a Contract to Get Started
       </h1>
       <div className="bg-white border rounded-2xl py-2 mb-10">
         {/* Search & Filters */}
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mb-6 px-6 pt-2">
-          <div className="w-1/3 relative">
+          <div className="md:w-1/3 relative w-full">
             <CiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
             <Input
               placeholder="Search"
+              value={searchValue}
+              onChange={(e) => {
+                setsearchValue(e.target.value);
+              }}
               className="w-full pl-10 pr-4 py-2 border
                border-gray-300 placeholder-gray-400 
                focus:outline-none focus:ring-2 focus:ring-gray-300"
             />
           </div>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex md:flex-wrap md:gap-4 gap-1 justify-between">
             <DatePickerWithLabel
               label="From"
               date={fromDate}
@@ -101,7 +88,7 @@ const ContractListing = () => {
         {/* Table */}
         <div className="overflow-x-auto border">
           <table className="w-full text-sm text-left">
-            <thead className="bg-gray-100 text-gray-500 font-medium">
+            <thead className="bg-gray-100 text-gray-500 font-medium md:text-base text-xs">
               <tr>
                 <th className="px-4 py-3">Contract Name</th>
                 <th className="px-4 py-3">Start Date</th>
@@ -111,7 +98,7 @@ const ContractListing = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {contracts.length === 0 ? (
+              {contracts?.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
                     <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
@@ -124,14 +111,19 @@ const ContractListing = () => {
                   </td>
                 </tr>
               ) : (
-                contracts.map((contract, i) => (
-                  <tr key={i} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium">{contract.name}</td>
-                    <td className="px-4 py-3">{contract.start}</td>
-                    <td className="px-4 py-3">{contract.end}</td>
-                    <td className="px-4 py-3">{contract.projects}</td>
-                    <td className="px-4 py-3 text-right">
-                      <GoArrowRight className="h-4 w-4 text-gray-500 cursor-pointer" />
+                contracts?.map((contract, i) => (
+                  <tr key={i} className="hover:bg-gray-50 md:text-base text-xs">
+                    <td className="px-4 py-4 font-medium">{contract.name}</td>
+                    <td className="px-4 py-4">{contract.start_date}</td>
+                    <td className="px-4 py-4">{contract.end_date}</td>
+                    <td className="px-4 py-4">{contract.projects_count}</td>
+                    <td className="px-4 py-4 text-right">
+                      <GoArrowRight
+                        className="h-4 w-4 text-gray-500 cursor-pointer"
+                        onClick={() => {
+                          router.push(`/techsummit/${contract.id}`);
+                        }}
+                      />
                     </td>
                   </tr>
                 ))
@@ -143,13 +135,21 @@ const ContractListing = () => {
         <div className="flex flex-col sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <span>Rows per page:</span>
-            <select className=" rounded-md px-2 py-1 text-sm">
-              <option value={10}>10</option>
-              <option value={20}>20</option>
+            <select
+              className="rounded-md px-2 py-1 text-sm"
+              onChange={(e) => setPage(Number(e.target.value))}
+            >
+              {Array.from({ length: pagination?.totalPages ?? 1 }, (_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex items-center gap-4">
-            <span>1–5 of 10</span>
+            <span>
+              {pagination?.page} of {pagination?.total}
+            </span>
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="icon">
                 <ChevronLeft className="h-4 w-4" />

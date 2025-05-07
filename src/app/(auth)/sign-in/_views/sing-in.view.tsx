@@ -8,17 +8,11 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import * as Yup from "yup";
 import { BeatLoader } from "react-spinners";
-import { useEffect } from "react";
 
 const SignInView = () => {
   const { isPending, mutateAsync } = useSignIn();
   const router = useRouter();
-  const exists = hasCookie("accessToken");
-  // useEffect(() => {
-  //   if (exists) {
-  //     router.push("/");
-  //   }
-  // }, [exists, router]);
+  const existsToken = hasCookie("accessToken");
 
   const formik = useFormik({
     initialValues: {
@@ -33,7 +27,7 @@ const SignInView = () => {
       await mutateAsync(values, {
         onSuccess: (data) => {
           if (data) {
-            console.log(data.accessToken);
+            console.log("Sign In", data);
             setCookie("accessToken", data.accessToken);
             router.push("/");
             toast.success("Logged In");

@@ -1,18 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "../back-button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import UserTable from "../table/usertable";
 import ExhibitorTable from "../table/exhibitortable";
+import {
+  GetContractTypeId,
+  useContractById,
+} from "@/mutation/get-contracts-by-id";
 
-const TechSummitContract = () => {
+interface TechSummitContractProps {
+  contractID: number; // or `number` if you cast `params.id`
+}
+const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
   const pathname = usePathname();
+  console.log("TechSummitContract", contractID);
 
-  interface TabsValType {
-    val: string;
-  }
+  // const [contractById, setcontractById] = useState<
+  //   GetContractTypeId | undefined
+  // >();
 
   const userContract = [
     {
@@ -49,38 +57,38 @@ const TechSummitContract = () => {
     },
   ];
 
-  const exhibitorContract = [
-    {
-      name: "NeuroTech Inc.",
-      createdOn: "03/10/2025",
-      address: "123 Innovation Drive, San Francisco, CA",
-      noOfManager: 2,
-    },
-    {
-      name: "Quantum Systems",
-      createdOn: "01/22/2025",
-      address: "456 Quantum Blvd, Austin, TX",
-      noOfManager: 1,
-    },
-    {
-      name: "Digital Health Corp",
-      createdOn: "02/18/2025",
-      address: "789 Wellness Way, Seattle, WA",
-      noOfManager: 5,
-    },
-    {
-      name: "BioMed Solutions",
-      createdOn: "04/01/2025",
-      address: "321 Medical Park, Boston, MA",
-      noOfManager: 5,
-    },
-    {
-      name: "GreenTech Expo",
-      createdOn: "03/28/2025",
-      address: "654 Eco Lane, Denver, CO",
-      noOfManager: 6,
-    },
-  ];
+  // const exhibitorContract = [
+  //   {
+  //     name: "NeuroTech Inc.",
+  //     createdOn: "03/10/2025",
+  //     address: "123 Innovation Drive, San Francisco, CA",
+  //     noOfManager: 2,
+  //   },
+  //   {
+  //     name: "Quantum Systems",
+  //     createdOn: "01/22/2025",
+  //     address: "456 Quantum Blvd, Austin, TX",
+  //     noOfManager: 1,
+  //   },
+  //   {
+  //     name: "Digital Health Corp",
+  //     createdOn: "02/18/2025",
+  //     address: "789 Wellness Way, Seattle, WA",
+  //     noOfManager: 5,
+  //   },
+  //   {
+  //     name: "BioMed Solutions",
+  //     createdOn: "04/01/2025",
+  //     address: "321 Medical Park, Boston, MA",
+  //     noOfManager: 5,
+  //   },
+  //   {
+  //     name: "GreenTech Expo",
+  //     createdOn: "03/28/2025",
+  //     address: "654 Eco Lane, Denver, CO",
+  //     noOfManager: 6,
+  //   },
+  // ];
 
   const [activeTabs, setactiveTabs] = useState<"user" | "exhibitor">("user");
   const handleTabs = (val: any) => {
@@ -88,7 +96,7 @@ const TechSummitContract = () => {
   };
 
   return (
-    <div className="px-4 sm:px-8 md:px-16 mt-6 overflow-hidden">
+    <div className="px-4 sm:px-8 md:px-16 mt-6">
       <BackButton />
       <div className="mb-8">
         <Link
@@ -141,9 +149,9 @@ const TechSummitContract = () => {
         <UserTable contracts={userContract}></UserTable>
       )}
       {/* Exhibitor Table */}
-      {activeTabs === "exhibitor" && (
+      {/* {activeTabs === "exhibitor" && (
         <ExhibitorTable contracts={exhibitorContract}></ExhibitorTable>
-      )}
+      )} */}
     </div>
   );
 };

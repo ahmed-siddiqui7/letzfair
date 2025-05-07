@@ -14,7 +14,7 @@ const DatePickerWithLabel = ({
   onChange: (date: Date | undefined) => void;
 }) => (
   <div className="flex items-center gap-2">
-    <span className="text-sm text-muted-foreground whitespace-nowrap font-bold">
+    <span className="md:block hidden text-sm text-muted-foreground whitespace-nowrap font-bold">
       {label}
     </span>
     <Popover>

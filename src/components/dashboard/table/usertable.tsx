@@ -63,7 +63,7 @@ const UserTable = ({ contracts }: UserTableProps) => {
             />
             <Select>
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select Innovators" />
+                <SelectValue placeholder="Select Innovators"></SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -90,7 +90,7 @@ const UserTable = ({ contracts }: UserTableProps) => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {contracts.length === 0 ? (
+              {contracts?.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
                     <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
@@ -111,7 +111,7 @@ const UserTable = ({ contracts }: UserTableProps) => {
                   </td>
                 </tr>
               ) : (
-                contracts.map((contract, i) => (
+                contracts?.map((contract, i) => (
                   <tr key={i} className="hover:bg-gray-50">
                     <td className="px-4 py-3 font-medium flex items-center gap-2">
                       <span>

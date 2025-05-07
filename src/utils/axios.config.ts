@@ -5,12 +5,13 @@ const BASE_URL = "https://staging-api.letzfair.com";
 
 export const axiosInstance = () => {
   const value = getCookie("accessToken");
+  console.log("axios instance ", value);
+
   const tokenVal: string | undefined =
     typeof value === "string" ? value : undefined;
-  console.log(tokenVal);
   return axios.create({
     headers: {
-      token: tokenVal,
+      Authorization: `Bearer ${tokenVal}`,
       "Content-Type": "application/json",
     },
     baseURL: BASE_URL,
