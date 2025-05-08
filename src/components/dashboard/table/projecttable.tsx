@@ -14,19 +14,24 @@ import {
 import DatePickerWithLabel from "../datepicker-label";
 import { CiSearch } from "react-icons/ci";
 import { Input } from "../../ui/input";
+import { FiPlus } from "react-icons/fi";
 
 type Contract = {
-  name: string;
-  createdOn: string;
-  address: string;
-  noOfManager: number;
+  projectname: string;
+  startdate: string;
+  enddate: string;
+  location: string;
+  status: string;
+  action: string;
 };
 
-interface ExhibitorTableProps {
+interface ProjectTableProps {
   contracts: Contract[];
 }
 
-const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
+const ProjectTable = ({ contracts }: ProjectTableProps) => {
+  console.log("project table", contracts);
+
   const [fromDate, setFromDate] = useState<Date | undefined>(
     new Date("2025-01-06")
   );
@@ -59,12 +64,12 @@ const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
               onChange={setToDate}
             />
             <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select Innovators" />
+              <SelectTrigger className="w-[80px]">
+                <SelectValue placeholder="All" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Tech Innovators Summit 2024</SelectLabel>
+                  <SelectLabel>All</SelectLabel>
                   <SelectItem value="Innovators Summit 2024">
                     Innovators Summit 2026
                   </SelectItem>
@@ -72,17 +77,22 @@ const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
                 </SelectGroup>
               </SelectContent>
             </Select>
+            <button className="flex items-center gap-2 bg-[#166DFB] text-white px-2.5 py-1.5 rounded">
+              <FiPlus />
+              <span>Create New Project</span>
+            </button>
           </div>
         </div>
         <div className="overflow-x-auto border">
           <table className="w-full text-sm text-left">
             <thead className="bg-gray-100 text-gray-500">
               <tr>
-                <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Created On</th>
-                <th className="px-4 py-3">Address</th>
-                <th className="px-4 py-3 text-center">No Of Manager</th>
-                <th className="px-4 py-3"></th>
+                <th className="px-4 py-3">Project Name</th>
+                <th className="px-4 py-3">Start Date</th>
+                <th className="px-4 py-3">End Date</th>
+                <th className="px-4 py-3">Location</th>
+                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3 text-center">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
@@ -109,13 +119,34 @@ const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
               ) : (
                 contracts.map((contract, i) => (
                   <tr key={i} className="hover:bg-gray-50">
-                    <td className="px-4 py-4 font-medium">{contract.name}</td>
-                    <td className="px-4 py-4">{contract.createdOn}</td>
-                    <td className="px-4 py-4">{contract.address}</td>
-                    <td className="px-4 py-4 text-center">
-                      {contract.noOfManager}
+                    <td className="px-4 py-3 font-medium">
+                      {contract.projectname}
                     </td>
-                    <td className="px-4 py-4 text-right"></td>
+                    <td className="px-4 py-3">{contract.startdate}</td>
+                    <td className="px-4 py-3">{contract.enddate}</td>
+                    <td className="px-4 py-3">{contract.location}</td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={
+                          contract.status === "Draft"
+                            ? "bg-gray-100 px-1.5 py-1 rounded"
+                            : "bg-green-100 px-1.5 py-1 rounded text-green-400"
+                        }
+                      >
+                        {contract.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <button
+                        className={
+                          contract.action === "Complete Setup"
+                            ? "border px-2 py-1.5 rounded border-orange-400 text-orange-400 w-3/4"
+                            : "border px-2 py-1.5 rounded border-blue-400 text-blue-400 w-3/4"
+                        }
+                      >
+                        {contract.action}
+                      </button>
+                    </td>
                   </tr>
                 ))
               )}
@@ -148,4 +179,4 @@ const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
   );
 };
 
-export default ExhibitorTable;
+export default ProjectTable;

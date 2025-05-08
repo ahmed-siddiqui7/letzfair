@@ -88,7 +88,7 @@ const ContractListing = () => {
         {/* Table */}
         <div className="overflow-x-auto border">
           <table className="w-full text-sm text-left">
-            <thead className="bg-gray-100 text-gray-500 font-medium md:text-base text-xs">
+            <thead className="bg-gray-100 text-gray-500 md:font-medium md:text-base text-xs">
               <tr>
                 <th className="px-4 py-3">Contract Name</th>
                 <th className="px-4 py-3">Start Date</th>

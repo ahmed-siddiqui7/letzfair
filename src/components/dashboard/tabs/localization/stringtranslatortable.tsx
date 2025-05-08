@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Button } from "../../ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GoArrowRight } from "react-icons/go";
+import { CiSearch } from "react-icons/ci";
+import { Input } from "@/components/ui/input";
+import DatePickerWithLabel from "../../datepicker-label";
 import {
   Select,
   SelectContent,
@@ -10,23 +12,42 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "../../ui/select";
-import DatePickerWithLabel from "../datepicker-label";
-import { CiSearch } from "react-icons/ci";
-import { Input } from "../../ui/input";
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { FaRegEdit } from "react-icons/fa";
 
-type Contract = {
-  name: string;
-  createdOn: string;
-  address: string;
-  noOfManager: number;
-};
+const StringTranslatorTable = () => {
+  const stringdata = [
+    {
+      id: 1,
+      name: "John",
+      createdOn: "12-9-2025",
+      address: "Checking Address",
+      noOfManager: 2,
+    },
+    {
+      id: 2,
+      name: "John",
+      createdOn: "12-9-2025",
+      address: "Checking Address",
+      noOfManager: 2,
+    },
+    {
+      id: 3,
+      name: "John",
+      createdOn: "12-9-2025",
+      address: "Checking Address",
+      noOfManager: 2,
+    },
+    {
+      id: 4,
+      name: "John",
+      createdOn: "12-9-2025",
+      address: "Checking Address",
+      noOfManager: 2,
+    },
+  ];
 
-interface ExhibitorTableProps {
-  contracts: Contract[];
-}
-
-const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
   const [fromDate, setFromDate] = useState<Date | undefined>(
     new Date("2025-01-06")
   );
@@ -35,11 +56,11 @@ const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
   );
 
   return (
-    <div>
+    <div className="mt-10">
       <div className="bg-white border rounded-2xl py-2 mb-10">
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mb-6 px-6 pt-2">
-          <div className="w-1/5 relative">
-            <CiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+          <div className="w-1/3 relative">
+            <CiSearch className="absolute left-4  text-gray-400 text-2xl top-1.5" />
             <Input
               placeholder="Search"
               className="w-full pl-10 pr-4 py-2 border
@@ -48,45 +69,33 @@ const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
             />
           </div>
           <div className="flex flex-wrap gap-4">
-            <DatePickerWithLabel
-              label="From"
-              date={fromDate}
-              onChange={setFromDate}
-            />
-            <DatePickerWithLabel
-              label="To"
-              date={toDate}
-              onChange={setToDate}
-            />
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select Innovators" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Tech Innovators Summit 2024</SelectLabel>
-                  <SelectItem value="Innovators Summit 2024">
-                    Innovators Summit 2026
-                  </SelectItem>
-                  <SelectItem value="Innovators">Innovators</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5">
+              <span>
+                <img src="/import.png" alt="" />
+              </span>
+              <span>Import</span>
+            </button>
+            <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5">
+              <span>
+                <img src="/export.png" alt="" />
+              </span>
+              <span>Export</span>
+            </button>
           </div>
         </div>
         <div className="overflow-x-auto border">
           <table className="w-full text-sm text-left">
             <thead className="bg-gray-100 text-gray-500">
               <tr>
-                <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Created On</th>
-                <th className="px-4 py-3">Address</th>
-                <th className="px-4 py-3 text-center">No Of Manager</th>
-                <th className="px-4 py-3"></th>
+                <th className="px-4 py-3">String Key</th>
+                <th className="px-4 py-3">English (EN)</th>
+                <th className="px-4 py-3">French (FR)</th>
+                <th className="px-4 py-3 text-center">Spanish (ES)</th>
+                <th className="px-4 py-3 text-center">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {contracts.length === 0 ? (
+              {stringdata.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
                     <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
@@ -107,15 +116,19 @@ const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
                   </td>
                 </tr>
               ) : (
-                contracts.map((contract, i) => (
+                stringdata.map((data, i) => (
                   <tr key={i} className="hover:bg-gray-50">
-                    <td className="px-4 py-4 font-medium">{contract.name}</td>
-                    <td className="px-4 py-4">{contract.createdOn}</td>
-                    <td className="px-4 py-4">{contract.address}</td>
+                    <td className="px-4 py-4 font-medium">{data.name}</td>
+                    <td className="px-4 py-4">{data.createdOn}</td>
+                    <td className="px-4 py-4">{data.address}</td>
                     <td className="px-4 py-4 text-center">
-                      {contract.noOfManager}
+                      {data.noOfManager}
                     </td>
-                    <td className="px-4 py-4 text-right"></td>
+                    <td className="px-4 py-4 text-center">
+                      <button>
+                        <FaRegEdit className="rounded size-5" />
+                      </button>
+                    </td>
                   </tr>
                 ))
               )}
@@ -148,4 +161,4 @@ const ExhibitorTable = ({ contracts }: ExhibitorTableProps) => {
   );
 };
 
-export default ExhibitorTable;
+export default StringTranslatorTable;
