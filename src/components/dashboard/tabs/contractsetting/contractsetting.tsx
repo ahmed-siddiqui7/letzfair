@@ -18,7 +18,7 @@ const ContractSetting = () => {
           className={` 
              ${
                tabValue === "generalsetting"
-                 ? "cursor-pointer border-blue-400 text-blue-400 bg-blue-100 rounded-4xl px-6 py-2 border"
+                 ? "cursor-pointer border-[#166DFB] text-[#166DFB] bg-[#DBE5FC] rounded-4xl px-6 py-2 border"
                  : " text-gray-600 cursor-pointer  rounded-4xl px-6 py-2 border"
              }`}
           onClick={() => handleTab("generalsetting")}
@@ -29,7 +29,7 @@ const ContractSetting = () => {
           className={` 
             ${
               tabValue === "contactfeatures"
-                ? "cursor-pointer border-blue-400 text-blue-400 bg-blue-100 rounded-4xl px-6 py-2 border"
+                ? "cursor-pointer border-[#166DFB] text-[#166DFB] bg-[#DBE5FC]  rounded-4xl px-6 py-2 border"
                 : " text-gray-600 cursor-pointer  rounded-4xl px-6 py-2 border"
             }`}
           onClick={() => handleTab("contactfeatures")}

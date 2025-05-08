@@ -12,6 +12,7 @@ import {
 import ProjectTable from "../table/projecttable";
 import ContractSetting from "../tabs/contractsetting/contractsetting";
 import Localization from "../tabs/localization/localization";
+import { Separator } from "@/components/ui/separator";
 
 interface TechSummitContractProps {
   contractID: number;
@@ -169,7 +170,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
       <h1 className="font-semibold text-xl sm:text-3xl mb-4">
         Tech Summit Contract
       </h1>
-      <div className=" mb-10 pb-2 flex gap-8 md:flex-row flex-col">
+      <div className="flex gap-8 md:flex-row flex-col">
         <button className="text-gray-600 cursor-pointer ">Sub Admins</button>
         <button
           className={`${
@@ -221,6 +222,9 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
         >
           Localization
         </button>
+      </div>
+      <div className="">
+        <Separator />
       </div>
       {/* User Table */}
       {activeTabs === "user" && (

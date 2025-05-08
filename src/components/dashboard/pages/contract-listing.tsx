@@ -13,6 +13,7 @@ import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ContractType, useContract } from "@/mutation/get-contracts";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ContractListing = () => {
   const [fromDate, setFromDate] = useState<Date | undefined>(
@@ -56,6 +57,17 @@ const ContractListing = () => {
       <h1 className="font-semibold text-xl sm:text-2xl mb-4 md:text-start text-center">
         Select a Contract to Get Started
       </h1>
+      {isLoading && (
+        <>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+          </div>
+        </>
+      )}
       <div className="bg-white border rounded-2xl py-2 mb-10">
         {/* Search & Filters */}
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mb-6 px-6 pt-2">

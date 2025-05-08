@@ -28,7 +28,7 @@ const Localization = () => {
           className={` 
              ${
                activeTab === "enabledlanguage"
-                 ? "cursor-pointer border-blue-400 text-blue-400 bg-blue-100 rounded-4xl px-4 py-2 border"
+                 ? "cursor-pointer border-[#166DFB] text-[#166DFB] bg-[#DBE5FC]  rounded-4xl px-4 py-2 border"
                  : " text-gray-600 cursor-pointer  rounded-4xl px-4 py-2 border"
              }`}
           onClick={() => handleTab("enabledlanguage")}
@@ -39,7 +39,7 @@ const Localization = () => {
           className={` 
             ${
               activeTab === "stringtranslation"
-                ? "cursor-pointer border-blue-400 text-blue-400 bg-blue-100 rounded-4xl px-4 py-2 border"
+                ? "cursor-pointer border-[#166DFB] text-[#166DFB] bg-[#DBE5FC]  rounded-4xl px-4 py-2 border"
                 : " text-gray-600 cursor-pointer  rounded-4xl px-4 py-2 border"
             }`}
           onClick={() => handleTab("stringtranslation")}
