@@ -18,7 +18,7 @@ const ContractFeatures = () => {
     Indoor_Map_Integration: false,
   });
 
-  console.log(checkedList);
+  console.log({ checkedList });
 
   return (
     <form className="mt-10">
@@ -35,7 +35,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Agenda_System ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -64,7 +64,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Private_Chat ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -88,7 +88,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Call_One_to_One ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -114,7 +114,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Matchmaking_Algorithm ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -140,7 +140,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Video_Call_Support ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -169,7 +169,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.AI_Based_Assistance ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -198,7 +198,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Enable_Badge ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -224,7 +224,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Enable_QR_Badge_Scan ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -253,7 +253,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Email_and_Survey_System ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"
@@ -280,7 +280,7 @@ const ContractFeatures = () => {
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
-                On
+                {checkedList.Enable_Social_Wall ? "On" : "Off"}
               </label>
               <Switch
                 className="cursor-pointer bg-blue-300"

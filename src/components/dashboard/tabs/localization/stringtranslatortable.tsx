@@ -48,13 +48,6 @@ const StringTranslatorTable = () => {
     },
   ];
 
-  const [fromDate, setFromDate] = useState<Date | undefined>(
-    new Date("2025-01-06")
-  );
-  const [toDate, setToDate] = useState<Date | undefined>(
-    new Date("2025-02-14")
-  );
-
   return (
     <div className="mt-10">
       <div className="bg-white border rounded-2xl py-2 mb-10">
@@ -69,13 +62,13 @@ const StringTranslatorTable = () => {
             />
           </div>
           <div className="flex flex-wrap gap-4">
-            <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5">
+            <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5 cursor-pointer">
               <span>
                 <img src="/import.png" alt="" />
               </span>
               <span>Import</span>
             </button>
-            <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5">
+            <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5 cursor-pointer">
               <span>
                 <img src="/export.png" alt="" />
               </span>
@@ -126,7 +119,7 @@ const StringTranslatorTable = () => {
                     </td>
                     <td className="px-4 py-4 text-center">
                       <button>
-                        <FaRegEdit className="rounded size-5" />
+                        <FaRegEdit className="rounded size-5 cursor-pointer" />
                       </button>
                     </td>
                   </tr>
