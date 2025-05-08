@@ -223,7 +223,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
           Localization
         </button>
       </div>
-      <div className="">
+      <div className="mb-12">
         <Separator />
       </div>
       {/* User Table */}
