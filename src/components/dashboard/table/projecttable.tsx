@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GoArrowRight } from "react-icons/go";
@@ -15,22 +15,37 @@ import DatePickerWithLabel from "../datepicker-label";
 import { CiSearch } from "react-icons/ci";
 import { Input } from "../../ui/input";
 import { FiPlus } from "react-icons/fi";
+import { getProject, useProject } from "@/mutation/get-projects";
+import { TechSummitContractProps } from "../pages/tech-summit-contract";
 
-type Contract = {
-  projectname: string;
-  startdate: string;
-  enddate: string;
-  location: string;
-  status: string;
-  action: string;
-};
+const ProjectTable = ({ contractID }: TechSummitContractProps) => {
+  type Project = {
+    id: number;
+    name: string;
+    start_date: string;
+    end_date: string;
+    location: string;
+    status: string;
+  };
 
-interface ProjectTableProps {
-  contracts: Contract[];
-}
+  const { data, isLoading, isError, error } = useProject({
+    contractId: contractID,
+    page: 1,
+    limit: 10,
+    end_date: "",
+    search: "",
+    sortBy: "",
+    sortOrder: "",
+    start_date: "",
+    status: "",
+  });
+  const [projectData, setProjectData] = useState<Project[] | undefined>([]);
 
-const ProjectTable = ({ contracts }: ProjectTableProps) => {
-  console.log("project table", contracts);
+  console.log("DATA", data);
+
+  useEffect(() => {
+    setProjectData(data?.projects);
+  }, [data]);
 
   const [fromDate, setFromDate] = useState<Date | undefined>(
     new Date("2025-01-06")
@@ -96,14 +111,14 @@ const ProjectTable = ({ contracts }: ProjectTableProps) => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {contracts.length === 0 ? (
+              {data?.length === 0 ? (
                 <tr>
-                  <td colSpan={5}>
+                  <td colSpan={6}>
                     <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
                       <img
                         src="/exhibitor.png"
                         alt="No contracts"
-                        className="w-90 h-70 mb-4 object-cover"
+                        className="w-60 h-70 mb-4 object-cover"
                       />
                       <h1 className="text-xl font-semibold">
                         No Users Invited Yet
@@ -117,34 +132,33 @@ const ProjectTable = ({ contracts }: ProjectTableProps) => {
                   </td>
                 </tr>
               ) : (
-                contracts.map((contract, i) => (
-                  <tr key={i} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium">
-                      {contract.projectname}
-                    </td>
-                    <td className="px-4 py-3">{contract.startdate}</td>
-                    <td className="px-4 py-3">{contract.enddate}</td>
-                    <td className="px-4 py-3">{contract.location}</td>
+                projectData?.map((project) => (
+                  <tr key={project.id} className="hover:bg-gray-50">
+                    <td className="px-4 py-3 font-medium">{project.name}</td>
+                    <td className="px-4 py-3">{project.start_date}</td>
+                    <td className="px-4 py-3">{project.end_date}</td>
+                    <td className="px-4 py-3">{project.location}</td>
                     <td className="px-4 py-3">
                       <span
                         className={
-                          contract.status === "Draft"
+                          project.status === "Draft"
                             ? "bg-gray-100 px-1.5 py-1 rounded"
                             : "bg-green-100 px-1.5 py-1 rounded text-green-400"
                         }
                       >
-                        {contract.status}
+                        {project.status}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-center">
                       <button
                         className={
-                          contract.action === "Complete Setup"
+                          data.action === "Complete Setup"
                             ? "border px-2 py-1.5 rounded border-orange-400 text-orange-400 w-3/4"
                             : "border px-2 py-1.5 rounded border-blue-400 text-blue-400 w-3/4"
                         }
                       >
-                        {contract.action}
+                        {data.action}
+                        Complete Setup
                       </button>
                     </td>
                   </tr>

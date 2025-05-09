@@ -39,7 +39,6 @@ const ContractListing = () => {
     start_date: "",
     end_date: "",
   });
-  console.log("data....", data);
 
   useEffect(() => {
     if (data?.contracts) {

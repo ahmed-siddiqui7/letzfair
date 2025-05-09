@@ -14,12 +14,12 @@ import ContractSetting from "../tabs/contractsetting/contractsetting";
 import Localization from "../tabs/localization/localization";
 import { Separator } from "@/components/ui/separator";
 
-interface TechSummitContractProps {
+export interface TechSummitContractProps {
   contractID: number;
 }
+
 const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
   const pathname = usePathname();
-  console.log("TechSummitContract", contractID);
 
   const userContract = [
     {
@@ -89,60 +89,9 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
     },
   ];
 
-  const projectContract = [
-    {
-      projectname: "GlobalTech Summit 2025",
-      startdate: "02/02/25",
-      enddate: "24/02/25",
-      location: "Hall A, Tech Expo Center",
-      status: "Draft",
-      action: "Complete Setup",
-    },
-    {
-      projectname: "NextGen AI Expo",
-      startdate: "11/03/25",
-      enddate: "25/03/25",
-      location: "Hall A, Innovation Hub",
-      status: "Published",
-      action: "View Details",
-    },
-    {
-      projectname: "MedNext Global 2025",
-      startdate: "03/01/25",
-      enddate: "20/02/25",
-      location: "Hall R, Tech Discovery Center",
-      status: "Draft",
-      action: "Complete Setup",
-    },
-    {
-      projectname: "NutriVive Health Expo",
-      startdate: "09/02/24",
-      enddate: "22/02/25",
-      location: "Hall D, Innovation Exhibition Center",
-      status: "Draft",
-      action: "Complete Setup",
-    },
-    {
-      projectname: "ArtNova Visual Expo",
-      startdate: "10/02/25",
-      enddate: "30/01/25",
-      location: "Hall F, Technology Showcase",
-      status: "Draft",
-      action: "Complete Setup",
-    },
-    {
-      projectname: "DesignForward Meetup",
-      startdate: "06/01/25",
-      enddate: "10/02/25",
-      location: "Hall 21B, Future Tech Pavilion",
-      status: "Published",
-      action: "View Details",
-    },
-  ];
-
   const [activeTabs, setactiveTabs] = useState<
     "user" | "exhibitor" | "project" | "contractsettings" | "localization"
-  >("user");
+  >("project");
   const handleTabs = (val: any) => {
     setactiveTabs(val);
   };
@@ -235,9 +184,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
         <ExhibitorTable contracts={exhibitorContract}></ExhibitorTable>
       )}
       {/* Project Table */}
-      {activeTabs === "project" && (
-        <ProjectTable contracts={projectContract}></ProjectTable>
-      )}
+      {activeTabs === "project" && <ProjectTable contractID={contractID} />}
       {/* Contract Setting */}
       {activeTabs === "contractsettings" && <ContractSetting></ContractSetting>}
       {activeTabs === "localization" && <Localization />}
