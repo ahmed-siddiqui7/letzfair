@@ -19,6 +19,13 @@ import { getProject, useProject } from "@/mutation/get-projects";
 import { TechSummitContractProps } from "../pages/tech-summit-contract";
 
 const ProjectTable = ({ contractID }: TechSummitContractProps) => {
+  const [search, setSearch] = useState<string>("");
+  const [fromDate, setFromDate] = useState<Date | undefined>(
+    new Date("2025-01-06")
+  );
+  const [toDate, setToDate] = useState<Date | undefined>(
+    new Date("2025-02-14")
+  );
   type Project = {
     id: number;
     name: string;
@@ -33,7 +40,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
     page: 1,
     limit: 10,
     end_date: "",
-    search: "",
+    search: search,
     sortBy: "",
     sortOrder: "",
     start_date: "",
@@ -41,18 +48,11 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
   });
   const [projectData, setProjectData] = useState<Project[] | undefined>([]);
 
-  console.log("DATA", data);
+  console.log("DATA", search);
 
   useEffect(() => {
     setProjectData(data?.projects);
   }, [data]);
-
-  const [fromDate, setFromDate] = useState<Date | undefined>(
-    new Date("2025-01-06")
-  );
-  const [toDate, setToDate] = useState<Date | undefined>(
-    new Date("2025-02-14")
-  );
 
   return (
     <div>
@@ -65,6 +65,10 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
               className="w-full pl-10 pr-4 py-2 border
                border-gray-300 placeholder-gray-400 
                focus:outline-none focus:ring-2 focus:ring-gray-300"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
             />
           </div>
           <div className="flex flex-wrap gap-4">
@@ -152,12 +156,11 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
                     <td className="px-4 py-3 text-center">
                       <button
                         className={
-                          data.action === "Complete Setup"
+                          project.status && "Complete Setup"
                             ? "border px-2 py-1.5 rounded border-orange-400 text-orange-400 w-3/4"
                             : "border px-2 py-1.5 rounded border-blue-400 text-blue-400 w-3/4"
                         }
                       >
-                        {data.action}
                         Complete Setup
                       </button>
                     </td>

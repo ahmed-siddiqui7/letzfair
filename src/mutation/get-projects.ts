@@ -9,8 +9,8 @@ export type ProjectType = {
   sortOrder: string;
   search: string;
   status: string;
-  start_date: string;
-  end_date: string;
+  start_date: string | undefined;
+  end_date: string | undefined;
 };
 
 export const getProject = async (payload: ProjectType) => {
