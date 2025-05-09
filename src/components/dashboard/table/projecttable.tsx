@@ -17,6 +17,7 @@ import { Input } from "../../ui/input";
 import { FiPlus } from "react-icons/fi";
 import { getProject, useProject } from "@/mutation/get-projects";
 import { TechSummitContractProps } from "../pages/tech-summit-contract";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ProjectTable = ({ contractID }: TechSummitContractProps) => {
   const [search, setSearch] = useState<string>("");
@@ -38,7 +39,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
   const { data, isLoading, isError, error } = useProject({
     contractId: contractID,
     page: 1,
-    limit: 10,
+    limit: 20,
     end_date: "",
     search: search,
     sortBy: "",
@@ -48,10 +49,14 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
   });
   const [projectData, setProjectData] = useState<Project[] | undefined>([]);
 
-  console.log("DATA", search);
+  console.log("search", data);
 
   useEffect(() => {
-    setProjectData(data?.projects);
+    if (data?.projects) {
+      setProjectData(data.projects);
+    } else {
+      setProjectData([]);
+    }
   }, [data]);
 
   return (
@@ -132,6 +137,23 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
                         by adding users to collaborate and engage in the
                         project.
                       </p>
+                    </div>
+                  </td>
+                </tr>
+              ) : isLoading ? (
+                <tr>
+                  <td colSpan={6}>
+                    <div className="space-y-4">
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
+                      <Skeleton className="h-5 w-full" />
                     </div>
                   </td>
                 </tr>
