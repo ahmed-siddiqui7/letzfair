@@ -11,7 +11,11 @@ import DatePickerWithLabel from "../datepicker-label";
 import { GoArrowRight } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
 import { useRouter } from "next/navigation";
-import { ContractType, useContract } from "@/mutation/get-contracts";
+import {
+  ContractItem,
+  ContractQueryResult,
+  useContract,
+} from "@/mutation/get-contracts"; // Import the correct types
 import { Skeleton } from "@/components/ui/skeleton";
 
 const ContractListing = () => {
@@ -24,8 +28,9 @@ const ContractListing = () => {
 
   const router = useRouter();
 
-  const [contracts, setcontracts] = useState<ContractType[] | undefined>();
-  const [pagination, setpagination] = useState<ContractType | undefined>();
+  const [contracts, setContracts] = useState<ContractItem[] | undefined>([]);
+  const [pagination, setPagination] =
+    useState<ContractQueryResult["pagination"]>();
   const [page, setPage] = useState(0);
   const [searchValue, setsearchValue] = useState<string>("");
 
@@ -41,12 +46,8 @@ const ContractListing = () => {
 
   useEffect(() => {
     if (data?.contracts) {
-      setcontracts(data.contracts);
-    }
-  }, [data]);
-  useEffect(() => {
-    if (data?.contracts) {
-      setpagination(data.pagination);
+      setContracts(data.contracts);
+      setPagination(data.pagination);
     }
   }, [data]);
 
@@ -97,7 +98,7 @@ const ContractListing = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {contracts ? (
+              {contracts && contracts.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
                     <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
