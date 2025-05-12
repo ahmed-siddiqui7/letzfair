@@ -28,12 +28,7 @@ const DatePickerWithLabel = ({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={onChange}
-          initialFocus
-        />
+        <Calendar mode="single" selected={date} onSelect={onChange} />
       </PopoverContent>
     </Popover>
   </div>
