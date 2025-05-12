@@ -100,19 +100,7 @@ const ContractListing = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {contracts?.length === 0 ? (
-                <tr>
-                  <td colSpan={5}>
-                    <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
-                      <img
-                        src="/nocontracts.png"
-                        alt="No contracts"
-                        className="w-60 h-50 mb-4"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              ) : isLoading ? (
+              {isLoading ? (
                 <tr>
                   <td colSpan={5}>
                     <div className="space-y-4">
