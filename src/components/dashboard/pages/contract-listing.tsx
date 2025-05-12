@@ -24,7 +24,7 @@ const ContractListing = () => {
 
   const router = useRouter();
 
-  const [contracts, setcontracts] = useState<ContractType | undefined>();
+  const [contracts, setcontracts] = useState<ContractType[] | undefined>();
   const [pagination, setpagination] = useState<ContractType | undefined>();
   const [page, setPage] = useState(0);
   const [searchValue, setsearchValue] = useState<string>("");
@@ -97,7 +97,7 @@ const ContractListing = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {contracts?.length === 0 ? (
+              {contracts ? (
                 <tr>
                   <td colSpan={5}>
                     <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
