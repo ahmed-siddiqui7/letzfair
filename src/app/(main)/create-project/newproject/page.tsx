@@ -128,7 +128,6 @@ const NewProject = () => {
                   mode="single"
                   selected={startDate}
                   onSelect={setStartDate}
-                  initialFocus
                 />
               </PopoverContent>
             </Popover>
@@ -155,7 +154,6 @@ const NewProject = () => {
                   mode="single"
                   selected={endDate}
                   onSelect={setEndDate}
-                  initialFocus
                 />
               </PopoverContent>
             </Popover>
