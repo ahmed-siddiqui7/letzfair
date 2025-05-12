@@ -23,7 +23,7 @@ export type ContractQueryResult = {
   contracts: ContractItem[];
   pagination: {
     page: number;
-    totalPages: number;
+    totalPages: number | undefined;
     total: number;
   };
 };

@@ -203,7 +203,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
           </table>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
+        {/* <div className="flex flex-col sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <span>Rows per page:</span>
             <select
@@ -230,7 +230,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

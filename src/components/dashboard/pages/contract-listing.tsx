@@ -15,7 +15,7 @@ import {
   ContractItem,
   ContractQueryResult,
   useContract,
-} from "@/mutation/get-contracts"; // Import the correct types
+} from "@/mutation/get-contracts";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const ContractListing = () => {
@@ -30,12 +30,8 @@ const ContractListing = () => {
 
   const [contracts, setContracts] = useState<ContractItem[] | undefined>([]);
   const [pagination, setPagination] = useState<
-    ContractQueryResult["pagination"]
-  >({
-    page: 1,
-    totalPages: 1,
-    total: 0,
-  });
+    ContractQueryResult["pagination"] | undefined
+  >(undefined);
 
   const [page, setPage] = useState(0);
   const [searchValue, setsearchValue] = useState<string>("");
@@ -153,16 +149,6 @@ const ContractListing = () => {
         <div className="flex flex-col sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <span>Rows per page:</span>
-            <select
-              className="rounded-md px-2 py-1 text-sm"
-              onChange={(e) => setPage(Number(e.target.value))}
-            >
-              {Array.from({ length: pagination?.totalPages ?? 1 }, (_, i) => (
-                <option key={i + 1} value={i + 1}>
-                  {i + 1}
-                </option>
-              ))}
-            </select>
           </div>
           <div className="flex items-center gap-4">
             <span>
