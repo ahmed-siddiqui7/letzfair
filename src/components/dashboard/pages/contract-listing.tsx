@@ -10,7 +10,6 @@ import { Button } from "../../ui/button";
 import DatePickerWithLabel from "../datepicker-label";
 import { GoArrowRight } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ContractType, useContract } from "@/mutation/get-contracts";
 import { Skeleton } from "@/components/ui/skeleton";

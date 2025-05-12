@@ -18,8 +18,12 @@ import { FiPlus } from "react-icons/fi";
 import { getProject, useProject } from "@/mutation/get-projects";
 import { TechSummitContractProps } from "../pages/tech-summit-contract";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
 
 const ProjectTable = ({ contractID }: TechSummitContractProps) => {
+  const router = useRouter();
+  const [pagination, setpagination] = useState();
+  const [page, setPage] = useState(0);
   const [search, setSearch] = useState<string>("");
   const [fromDate, setFromDate] = useState<Date | undefined>(
     new Date("2025-01-06")
@@ -54,6 +58,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
   useEffect(() => {
     if (data?.projects) {
       setProjectData(data.projects);
+      setpagination(data?.pagination);
     } else {
       setProjectData([]);
     }
@@ -101,7 +106,12 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <button className="flex items-center gap-2 bg-[#166DFB] text-white px-2.5 py-1.5 rounded">
+            <button
+              className="flex items-center gap-2 bg-[#166DFB] text-white px-2.5 py-1.5 rounded cursor-pointer"
+              onClick={() => {
+                router.push("/create-project");
+              }}
+            >
               <FiPlus />
               <span>Create New Project</span>
             </button>
@@ -196,13 +206,21 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
         <div className="flex flex-col sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <span>Rows per page:</span>
-            <select className=" rounded-md px-2 py-1 text-sm">
-              <option value={10}>10</option>
-              <option value={20}>20</option>
+            <select
+              className="rounded-md px-2 py-1 text-sm"
+              onChange={(e) => setPage(Number(e.target.value))}
+            >
+              {Array.from({ length: pagination?.totalPages ?? 1 }, (_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex items-center gap-4">
-            <span>1–5 of 10</span>
+            <span>
+              {pagination?.page} of {pagination?.total}
+            </span>
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="icon">
                 <ChevronLeft className="h-4 w-4" />

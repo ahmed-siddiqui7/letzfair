@@ -9,14 +9,15 @@ export type ProjectType = {
   sortOrder: string;
   search: string;
   status: string;
-  start_date: string | undefined;
-  end_date: string | undefined;
+  start_date: string;
+  end_date: string;
 };
 
 export const getProject = async (payload: ProjectType) => {
   const contractId = payload.contractId;
+  const search = payload.search;
   const response = await axiosInstance().get(
-    `/api/v1/contracts/${contractId}/projects`
+    `/api/v1/contracts/${contractId}/projects?`
   );
   return response.data;
 };
