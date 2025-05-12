@@ -1,11 +1,19 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
+import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
 
 const CreateProject = () => {
   const router = useRouter();
+  const cookie = getCookie("accessToken");
+  console.log(cookie);
+  useEffect(() => {
+    if (!cookie) {
+      router.push("/sign-in");
+    }
+  }, []);
 
   type Tabs = {
     basicprojectinformation: boolean;
