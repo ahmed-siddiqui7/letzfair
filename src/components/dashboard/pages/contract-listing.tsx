@@ -29,8 +29,14 @@ const ContractListing = () => {
   const router = useRouter();
 
   const [contracts, setContracts] = useState<ContractItem[] | undefined>([]);
-  const [pagination, setPagination] =
-    useState<ContractQueryResult["pagination"]>();
+  const [pagination, setPagination] = useState<
+    ContractQueryResult["pagination"]
+  >({
+    page: 1,
+    totalPages: 1,
+    total: 0,
+  });
+
   const [page, setPage] = useState(0);
   const [searchValue, setsearchValue] = useState<string>("");
 
