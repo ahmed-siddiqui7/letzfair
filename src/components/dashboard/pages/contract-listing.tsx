@@ -123,7 +123,7 @@ const ContractListing = () => {
                   </td>
                 </tr>
               ) : (
-                contracts?.map((contract, i) => (
+                (contracts ?? []).map((contract, i) => (
                   <tr key={i} className="hover:bg-gray-50 md:text-base text-xs">
                     <td className="px-4 py-4 font-medium">{contract.name}</td>
                     <td className="px-4 py-4">{contract.start_date}</td>
