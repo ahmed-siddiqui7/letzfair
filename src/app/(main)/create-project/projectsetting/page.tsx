@@ -33,8 +33,10 @@ const ProjectSetting = () => {
       <div className="px-4 sm:px-10 lg:px-32">
         {/* Page Head */}
         <div className="mt-10">
-          <h1 className="text-3xl font-medium">Project Settings</h1>
-          <p className="mt-2">
+          <h1 className="md:text-3xl lg:text-3xl sm:text-3xl text-xl font-medium ">
+            Project Settings
+          </h1>
+          <p className="mt-2 md:text-base text-sm">
             Configure project visibility, access rules, and additional settings
             to control how your project appears and functions.
           </p>
@@ -51,7 +53,7 @@ const ProjectSetting = () => {
         >
           <div>
             <h3 className="font-medium">Project visibility</h3>
-            <p>
+            <p className="md:text-base text-xs md:mt-0 mt-1">
               Choose whether your project is visible to everyone or restricted
               to a specific audience
             </p>
@@ -93,7 +95,9 @@ const ProjectSetting = () => {
               </div>
               <div>
                 <h3 className="font-medium">Free Access</h3>
-                <p>Anyone can join without restrictions.</p>
+                <p className="md:text-base text-xs md:mt-0 mt-1">
+                  Anyone can join without restrictions.
+                </p>
               </div>
             </div>
             <div className="my-5">
@@ -110,7 +114,9 @@ const ProjectSetting = () => {
               </div>
               <div>
                 <h3 className="font-medium">Project Access</h3>
-                <p>Only users manually added by the admin can join.</p>
+                <p className="md:text-base text-xs md:mt-0 mt-1">
+                  Only users manually added by the admin can join.
+                </p>
               </div>
             </div>
             <div className="my-5">
@@ -127,7 +133,7 @@ const ProjectSetting = () => {
               </div>
               <div>
                 <h3 className="font-medium">With Admin Approval</h3>
-                <p>
+                <p className="md:text-base text-xs md:mt-0 mt-1">
                   Users can request to join, but require admin approval before
                   accessing the project dashboard.
                 </p>
@@ -141,7 +147,9 @@ const ProjectSetting = () => {
         <div className="flex justify-between bg-gray-100 rounded-xl px-6 py-7 mt-6">
           <div>
             <h3 className="font-medium">Agenda System</h3>
-            <p>Enable agenda/meeting systems for your project.</p>
+            <p className="md:text-base text-xs md:mt-0 mt-1">
+              Enable agenda/meeting systems for your project.
+            </p>
           </div>
           <div className="flex items-center gap-1">
             <label htmlFor="" className="text-xs">
@@ -166,7 +174,9 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Private Chat</h3>
-              <p>Enable direct messaging between attendees.</p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
+                Enable direct messaging between attendees.
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
@@ -190,7 +200,9 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Call One-To-One</h3>
-              <p>Provide voice calling options</p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
+                Provide voice calling options
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
@@ -214,7 +226,9 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Matchmaking Alogrithm</h3>
-              <p>Suggest relevant connections based on attendee preferences</p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
+                Suggest relevant connections based on attendee preferences
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
@@ -238,7 +252,9 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Video Call Support</h3>
-              <p>Allow video call for networking and sessions</p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
+                Allow video call for networking and sessions
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
@@ -262,7 +278,9 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Affinity Rate</h3>
-              <p>Match users based on shared interests or affinity levels</p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
+                Match users based on shared interests or affinity levels
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
@@ -289,7 +307,9 @@ const ProjectSetting = () => {
         <div className="flex justify-between bg-gray-100 rounded-xl px-6 py-7 mt-6 mb-10">
           <div>
             <h3 className="font-medium">AI Based Assistance</h3>
-            <p>Enable automated AI-based assistance support for users</p>
+            <p className="md:text-base text-xs md:mt-0 mt-1">
+              Enable automated AI-based assistance support for users
+            </p>
           </div>
           <div className="flex items-center gap-1">
             <label htmlFor="" className="text-xs">
@@ -314,7 +334,9 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Enable Badge</h3>
-              <p>Generate digital or printable badges for participants</p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
+                Generate digital or printable badges for participants
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
@@ -338,7 +360,9 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Enable QR Badge Scan </h3>
-              <p>Allow badge scanning for attendance or verification</p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
+                Allow badge scanning for attendance or verification
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
@@ -366,7 +390,9 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Email and Survey System</h3>
-              <p>Send emails and collect feedback through surveys</p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
+                Send emails and collect feedback through surveys
+              </p>
             </div>
             <div className="flex items-center gap-1">
               <label htmlFor="" className="text-xs">
@@ -390,7 +416,7 @@ const ProjectSetting = () => {
           <div className="flex justify-between items-center">
             <div>
               <h3 className="font-medium">Enable Social Wall</h3>
-              <p>
+              <p className="md:text-base text-xs md:mt-0 mt-1">
                 Allow users to post and interact in a social feed within the
                 project
               </p>
@@ -418,7 +444,7 @@ const ProjectSetting = () => {
         <div className="flex justify-between bg-gray-100 rounded-xl px-6 py-7 mt-6 mb-10">
           <div>
             <h3 className="font-medium">Statistics</h3>
-            <p>
+            <p className="md:text-base text-xs md:mt-0 mt-1">
               View project performance, attendee engagement, and session
               analytics
             </p>
@@ -447,7 +473,9 @@ const ProjectSetting = () => {
         <div className="flex justify-between bg-gray-100 rounded-xl px-6 py-7 mt-6 mb-10">
           <div>
             <h3 className="font-medium">Indoor Map Integration</h3>
-            <p>Display a virtual venue map for easy navigation</p>
+            <p className="md:text-base text-xs md:mt-0 mt-1">
+              Display a virtual venue map for easy navigation
+            </p>
           </div>
           <div className="flex items-center gap-1">
             <label htmlFor="" className="text-xs">
@@ -467,7 +495,7 @@ const ProjectSetting = () => {
         </div>
 
         {/* Cancel and Submit */}
-        <div className="flex justify-end  mt-6 mb-10 gap-5">
+        <div className="flex md:justify-end  mt-6 mb-10 space-x-3 justify-center">
           <button
             className="border-[#166DFB] px-6 py-2 rounded border text-[#166DFB] cursor-pointer"
             type="button"
