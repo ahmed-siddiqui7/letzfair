@@ -1,7 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useForgotPassword } from "@/mutation/forgot-password";
+import { useForgotPassword } from "@/app/(auth)/forgot-password/_mutation/forgot-password";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";
