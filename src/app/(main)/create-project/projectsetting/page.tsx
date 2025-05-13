@@ -26,6 +26,8 @@ const ProjectSetting = () => {
     freeAccess: "",
   });
 
+  console.log("projectVisibility", projectVisibility);
+
   return (
     <form>
       <div className="px-4 sm:px-10 lg:px-32">
@@ -42,7 +44,11 @@ const ProjectSetting = () => {
         <h2 className="mt-8 font-medium text-xl">
           Project Visibility Settings
         </h2>
-        <div className="flex justify-between bg-gray-100 rounded-xl px-6 py-7 mt-6">
+        <div
+          className={`flex justify-between bg-gray-100 rounded-xl px-6 py-7 mt-6 ${
+            !projectVisibility.projectvisibility && "opacity-55"
+          }`}
+        >
           <div>
             <h3 className="font-medium">Project visibility</h3>
             <p>
@@ -419,7 +425,7 @@ const ProjectSetting = () => {
           </div>
           <div className="flex items-center gap-1">
             <label htmlFor="" className="text-xs">
-              {projectVisibility.statistics ? "Visible" : "Hide"}
+              {projectVisibility.statistics ? "On" : "Off"}
             </label>
             <Switch
               className="cursor-pointer bg-blue-300"
@@ -445,7 +451,7 @@ const ProjectSetting = () => {
           </div>
           <div className="flex items-center gap-1">
             <label htmlFor="" className="text-xs">
-              {projectVisibility.indoorMapIntegration ? "Visible" : "Hide"}
+              {projectVisibility.indoorMapIntegration ? "On" : "Off"}
             </label>
             <Switch
               className="cursor-pointer bg-blue-300"
@@ -459,15 +465,17 @@ const ProjectSetting = () => {
             />
           </div>
         </div>
+
+        {/* Cancel and Submit */}
         <div className="flex justify-end  mt-6 mb-10 gap-5">
           <button
-            className="border-[#166DFB] px-6 py-2 rounded border text-[#166DFB]"
+            className="border-[#166DFB] px-6 py-2 rounded border text-[#166DFB] cursor-pointer"
             type="button"
           >
             Cancel
           </button>
           <button
-            className="bg-[#166DFB] text-white px-8 py-2 rounded"
+            className="bg-[#166DFB] text-white px-8 py-2 rounded cursor-pointer"
             type="submit"
           >
             Save
