@@ -11,9 +11,17 @@ import { CiSearch } from "react-icons/ci";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
-import CancelModal from "../_modal/page";
+import CancelModal from "../_modal/CancelModal";
+import { useState } from "react";
+import AddModalCategory from "../_modal/AddModalCategory";
 
 const CustomPropertyTable = () => {
+  const [addNewProperty, setAddNewProperty] = useState({
+    selectField: "",
+    enterFieldLabel: "",
+    enterPlaceHolder: "",
+    visibility: {},
+  });
   const contracts = [
     {
       name: "Ahmed",
@@ -76,12 +84,8 @@ const CustomPropertyTable = () => {
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <button className="flex items-center space-x-1 bg-[#166DFB] text-white px-4 py-1.5 rounded cursor-pointer">
-              <span>
-                <FiPlus />
-              </span>
-              <span>Add Custom Property</span>
-            </button>
+            {/* ADD NEW PROPERTY */}
+            <AddModalCategory />
           </div>
         </div>
         <div className="overflow-x-auto border">
