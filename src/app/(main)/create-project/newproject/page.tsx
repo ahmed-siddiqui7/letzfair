@@ -17,12 +17,16 @@ import { CalendarIcon, ImagePlus } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useNewProject } from "@/mutation/new-project";
 
 const NewProject = () => {
+  const { data, mutateAsync } = useNewProject();
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
-  const [bannerFile, setBannerFile] = useState<File | null>(null);
+
+  const [bannerFile, setBannerFile] = useState<File | string>();
   const router = useRouter();
 
   const formik = useFormik({
@@ -36,15 +40,31 @@ const NewProject = () => {
       description: Yup.string().required("Description is required"),
       location: Yup.string().required("Location is required"),
     }),
-    onSubmit: (values) => {
-      toast.success("Data saved");
-      router.push("/create-project");
-      console.log("Form data:", {
-        ...values,
-        startDate,
-        endDate,
-        bannerFile,
-      });
+    onSubmit: async (values) => {
+      if (!startDate || !endDate || !bannerFile) {
+        toast.error("Please fill all fields including dates and banner.");
+        return;
+      }
+
+      try {
+        const payload = {
+          name: values.projectName,
+          description: values.description,
+          location: values.location,
+          start_date: startDate.toISOString(),
+          end_date: endDate.toISOString(),
+          banner_image_url: bannerFile,
+        };
+
+        await mutateAsync(payload);
+
+        toast.success("Data saved");
+        router.push("/create-project");
+        console.log("values:", { values, bannerFile, startDate, endDate });
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        toast.error("Failed to save data. Please try again.");
+      }
     },
   });
 
@@ -53,7 +73,12 @@ const NewProject = () => {
   };
 
   const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) setBannerFile(e.target.files[0]);
+    if (e.target.files?.[0]) {
+      const fileName = e.target.files?.[0].name;
+      console.log("e.target.files?.[0]");
+      setBannerFile(fileName);
+      // setBannerFile(e.target.files[0]);
+    }
   };
 
   return (

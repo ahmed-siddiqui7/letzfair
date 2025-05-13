@@ -1,4 +1,5 @@
 "use client";
+
 import TechSummitContract from "@/components/dashboard/pages/tech-summit-contract";
 import { getCookie } from "cookies-next";
 import { useParams, useRouter } from "next/navigation";
@@ -6,19 +7,28 @@ import React, { useEffect } from "react";
 
 const TechSummit = () => {
   const router = useRouter();
+  const params = useParams();
+
   const cookie = getCookie("accessToken");
-  console.log(cookie);
+  const contractId = Array.isArray(params.id) ? params.id[0] : params.id;
+
   useEffect(() => {
     if (!cookie) {
       router.push("/sign-in");
+      return;
     }
-  }, []);
-  const params = useParams();
-  console.log(params.id);
+    if (contractId) {
+      localStorage.setItem("contractId", contractId);
+    }
+  }, [cookie, contractId]);
+
+  if (!contractId) {
+    return <div>Loading...</div>; // Prevent crash if ID is undefined
+  }
 
   return (
     <div>
-      <TechSummitContract contractID={Number(params.id)} />
+      <TechSummitContract contractID={Number(contractId)} />
     </div>
   );
 };
