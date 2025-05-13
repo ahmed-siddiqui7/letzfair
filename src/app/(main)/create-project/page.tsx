@@ -1,6 +1,6 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
-import { getCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
@@ -96,13 +96,18 @@ const CreateProject = () => {
           <FaCircleCheck className="text-2xl text-gray-400" />
           <div className="flex-1">
             <h2 className="text-lg sm:text-xl">
-              Create Custom Property (optional)
+              Create Custom Property (optional).
             </h2>
             <p className="text-sm sm:text-base text-[#666566]">
-              Create custom properties to collect specific details
+              Create custom properties to collect specific details.
             </p>
           </div>
-          <button className="cursor-pointer w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500">
+          <button
+            className="cursor-pointer w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500"
+            onClick={() => {
+              router.push("/create-project/customproperty");
+            }}
+          >
             Create Property
           </button>
         </div>
