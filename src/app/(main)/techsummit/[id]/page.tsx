@@ -1,7 +1,7 @@
 "use client";
 
 import TechSummitContract from "@/components/dashboard/pages/tech-summit-contract";
-import { getCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
@@ -18,7 +18,7 @@ const TechSummit = () => {
       return;
     }
     if (contractId) {
-      localStorage.setItem("contractId", contractId);
+      setCookie("contractId", contractId);
     }
   }, [cookie, contractId]);
 
