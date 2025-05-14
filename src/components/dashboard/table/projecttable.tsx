@@ -95,7 +95,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
               onChange={setToDate}
             />
             <Select>
-              <SelectTrigger className="w-[80px]">
+              <SelectTrigger className="w-auto">
                 <SelectValue placeholder="All" />
               </SelectTrigger>
               <SelectContent>
