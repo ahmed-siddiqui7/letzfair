@@ -57,6 +57,8 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
 
   useEffect(() => {
     if (data?.projects) {
+      console.log("project", data);
+
       setProjectData(data.projects);
       setpagination(data?.pagination);
     } else {

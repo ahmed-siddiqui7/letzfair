@@ -12,9 +12,9 @@ export type projectType = {
 };
 
 const getID = getCookie("contractId");
-console.log(getID);
 
 export const NewProject = async (payload: projectType) => {
+  console.log("payload", payload);
   const response = await axiosInstance().post(
     `/api/v1/contracts/${getID}/projects`,
     payload

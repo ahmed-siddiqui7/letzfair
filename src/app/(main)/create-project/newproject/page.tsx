@@ -18,6 +18,7 @@ import React, { useRef, useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useNewProject } from "@/mutation/new-project";
+import axios from "axios";
 
 const NewProject = () => {
   const { data, mutateAsync } = useNewProject();
@@ -27,6 +28,7 @@ const NewProject = () => {
   const [endDate, setEndDate] = useState<Date>();
 
   const [bannerFile, setBannerFile] = useState<File | string>();
+
   const router = useRouter();
 
   const formik = useFormik({
@@ -57,7 +59,6 @@ const NewProject = () => {
         };
 
         await mutateAsync(payload);
-
         toast.success("Data saved");
         router.push("/create-project");
         console.log("values:", { values, bannerFile, startDate, endDate });
@@ -72,12 +73,25 @@ const NewProject = () => {
     inputRef.current?.click();
   };
 
-  const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBannerChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
-      const fileName = e.target.files?.[0].name;
-      console.log("e.target.files?.[0]");
-      setBannerFile(fileName);
-      // setBannerFile(e.target.files[0]);
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("files", file);
+      try {
+        const res = await axios.post(
+          "https://staging-api.flowbills.com/api/v1/upload/files",
+          formData
+        );
+        console.log(res);
+        const imageUrl = res.data.urls[0];
+        console.log("imageUrl", imageUrl);
+        setBannerFile(imageUrl);
+        toast.success("Image uploaded");
+      } catch (error: any) {
+        console.error("Upload failed", error.response?.data || error.message);
+        toast.error("Banner upload failed");
+      }
     }
   };
 
@@ -211,23 +225,29 @@ const NewProject = () => {
             onClick={handleClick}
             className="cursor-pointer flex flex-col items-center justify-center border border-dashed border-gray-300 rounded-md h-48 text-center p-4 hover:bg-gray-50 transition-colors"
           >
-            <ImagePlus className="text-blue-500 mb-2 h-6 w-6" />
-            <p className="text-sm">
-              <span className="text-blue-600 font-medium">Click here</span> to
-              upload Banner
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">
-              The format must be a png/jpg format.
-              <br />
-              (Max. File size: 5 MB)
-            </p>
-            <input
-              type="file"
-              accept=".png,.jpg,.jpeg"
-              className="hidden"
-              ref={inputRef}
-              onChange={handleBannerChange}
-            />
+            {bannerFile ? (
+              <img src={bannerFile} alt="edit image" className="w-10" />
+            ) : (
+              <>
+                <ImagePlus className="text-blue-500 mb-2 h-6 w-6" />
+                <p className="text-sm">
+                  <span className="text-blue-600 font-medium">Click here</span>{" "}
+                  to upload Banner
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  The format must be a png/jpg format.
+                  <br />
+                  (Max. File size: 5 MB)
+                </p>
+                <input
+                  type="file"
+                  accept=".png,.jpg,.jpeg"
+                  className="hidden"
+                  ref={inputRef}
+                  onChange={handleBannerChange}
+                />
+              </>
+            )}
           </div>
         </div>
 
