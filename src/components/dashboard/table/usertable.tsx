@@ -41,7 +41,7 @@ const UserTable = ({ contracts }: UserTableProps) => {
     <div>
       <div className="bg-white border rounded-2xl py-2 mb-10">
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mb-6 px-6 pt-2">
-          <div className="w-1/5 relative">
+          <div className="md:w-1/5 relative w-full">
             <CiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
             <Input
               placeholder="Search"
@@ -50,7 +50,7 @@ const UserTable = ({ contracts }: UserTableProps) => {
                focus:outline-none focus:ring-2 focus:ring-gray-300"
             />
           </div>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 md:justify-normal justify-between">
             <DatePickerWithLabel
               label="From"
               date={fromDate}
@@ -62,7 +62,7 @@ const UserTable = ({ contracts }: UserTableProps) => {
               onChange={setToDate}
             />
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="md:w-auto w-full">
                 <SelectValue placeholder="Select Innovators"></SelectValue>
               </SelectTrigger>
               <SelectContent>

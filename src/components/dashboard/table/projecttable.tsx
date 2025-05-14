@@ -58,7 +58,6 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
   useEffect(() => {
     if (data?.projects) {
       console.log("project", data);
-
       setProjectData(data.projects);
       setpagination(data?.pagination);
     } else {
@@ -70,7 +69,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
     <div>
       <div className="bg-white border rounded-2xl py-2 mb-10">
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mb-6 px-6 pt-2">
-          <div className="w-1/5 relative">
+          <div className="md:w-1/5 w-full relative">
             <CiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
             <Input
               placeholder="Search"
@@ -83,7 +82,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
               }}
             />
           </div>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 md:justify-normal justify-between">
             <DatePickerWithLabel
               label="From"
               date={fromDate}
@@ -95,7 +94,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
               onChange={setToDate}
             />
             <Select>
-              <SelectTrigger className="w-auto">
+              <SelectTrigger className="md:w-auto w-full">
                 <SelectValue placeholder="All" />
               </SelectTrigger>
               <SelectContent>
@@ -111,7 +110,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
             <button
               className="flex items-center gap-2 bg-[#166DFB] text-white px-2.5 py-1.5 rounded cursor-pointer"
               onClick={() => {
-                router.push("/create-project");
+                router.push(`/techsummit/${contractID}/create-project`);
               }}
             >
               <FiPlus />
@@ -191,7 +190,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
                       <button
                         className={
                           project.status && "Complete Setup"
-                            ? "border px-2 py-1.5 rounded border-orange-400 text-orange-400 w-3/4"
+                            ? "border px-2 py-1.5 rounded border-orange-400 text-orange-400 md:w-3/4 cursor-pointer w-full"
                             : "border px-2 py-1.5 rounded border-blue-400 text-blue-400 w-3/4"
                         }
                       >

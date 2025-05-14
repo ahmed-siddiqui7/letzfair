@@ -116,7 +116,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
           Tech Summit Contracts
         </Link>
       </div>
-      <h1 className="font-semibold text-xl sm:text-3xl mb-4">
+      <h1 className="font-semibold text-2xl sm:text-3xl mb-4">
         Tech Summit Contract
       </h1>
       <div className="flex gap-8 md:flex-row flex-col">
@@ -124,7 +124,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
         <button
           className={`${
             activeTabs === "user"
-              ? "border-blue-400 text-blue-400 border-b-2"
+              ? "md:border-blue-400 md:text-blue-400 md:border-b-2 text-blue-400"
               : "text-gray-600"
           } cursor-pointer`}
           onClick={() => handleTabs("user")}
@@ -134,7 +134,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
         <button
           className={`${
             activeTabs === "exhibitor"
-              ? "border-blue-400 text-blue-400 border-b-2"
+              ? "md:border-blue-400 md:text-blue-400 md:border-b-2  text-blue-400"
               : "text-gray-600"
           } cursor-pointer`}
           onClick={() => handleTabs("exhibitor")}
@@ -144,7 +144,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
         <button
           className={`${
             activeTabs === "project"
-              ? "border-blue-400 text-blue-400 border-b-2"
+              ? "md:border-blue-400 md:text-blue-400 md:border-b-2  text-blue-400"
               : "text-gray-600"
           } cursor-pointer`}
           onClick={() => handleTabs("project")}
@@ -154,7 +154,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
         <button
           className={`${
             activeTabs === "contractsettings"
-              ? "border-blue-400 text-blue-400 border-b-2"
+              ? "md:border-blue-400 md:text-blue-400 md:border-b-2  text-blue-400"
               : "text-gray-600"
           } cursor-pointer`}
           onClick={() => handleTabs("contractsettings")}
@@ -164,7 +164,7 @@ const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
         <button
           className={`${
             activeTabs === "localization"
-              ? "border-blue-400 text-blue-400 border-b-2"
+              ? "md:border-blue-400 md:text-blue-400 md:border-b-2  text-blue-400"
               : "text-gray-600"
           } cursor-pointer`}
           onClick={() => handleTabs("localization")}

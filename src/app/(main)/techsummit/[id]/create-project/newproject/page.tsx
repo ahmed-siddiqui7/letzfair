@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useNewProject } from "@/mutation/new-project";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const NewProject = () => {
   const { data, mutateAsync } = useNewProject();
@@ -30,6 +31,7 @@ const NewProject = () => {
   const [bannerFile, setBannerFile] = useState<File | string>();
 
   const router = useRouter();
+  const contractId = getCookie("contractId");
 
   const formik = useFormik({
     initialValues: {
@@ -60,7 +62,7 @@ const NewProject = () => {
 
         await mutateAsync(payload);
         toast.success("Data saved");
-        router.push("/create-project");
+        router.push(`/techsummit/${contractId}/create-project`);
         console.log("values:", { values, bannerFile, startDate, endDate });
       } catch (error) {
         console.error("Error submitting form:", error);

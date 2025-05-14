@@ -8,6 +8,7 @@ import { FaCircleCheck } from "react-icons/fa6";
 const CreateProject = () => {
   const router = useRouter();
   const cookie = getCookie("accessToken");
+  const contractId = getCookie("contractId");
   console.log(cookie);
   useEffect(() => {
     if (!cookie) {
@@ -62,7 +63,7 @@ const CreateProject = () => {
                 basicprojectinformation: true,
               }));
               localStorage.setItem("projectTab", JSON.stringify(tabs));
-              router.push("/create-project/newproject");
+              router.push(`create-project/newproject`);
             }}
           >
             Create
@@ -82,7 +83,7 @@ const CreateProject = () => {
           </div>
           <button
             onClick={() => {
-              router.push("/create-project/projectsetting");
+              router.push("create-project/projectsetting");
             }}
             className="cursor-pointer w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500"
           >
@@ -105,7 +106,7 @@ const CreateProject = () => {
           <button
             className="cursor-pointer w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500"
             onClick={() => {
-              router.push("/create-project/customproperty");
+              router.push("create-project/customproperty");
             }}
           >
             Create Property

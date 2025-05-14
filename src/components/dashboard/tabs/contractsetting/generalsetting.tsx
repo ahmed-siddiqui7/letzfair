@@ -8,24 +8,24 @@ const GeneralSetting = () => {
       <div>
         <h1 className="text-xl font-medium">Project Configuration</h1>
         <div className="flex flex-col bg-gray-100 rounded-xl py-4 mt-4">
-          <div className="flex justify-between items-center px-6">
+          <div className="flex justify-between items-center md:px-6 px-2">
             <div>
-              <h2 className=" text-lg">Maximum Projects Allowed</h2>
-              <p className="text-gray-500">
+              <h2 className="text-lg">Maximum Projects Allowed</h2>
+              <p className="text-gray-500 md:text-base text-sm">
                 This is the maximum number of projects your contract allows.
               </p>
             </div>
             <div>
-              <h3 className="text-lg text-gray-500">10 Projects</h3>
+              <h3 className="md:text-lg text-gray-500">10 Projects</h3>
             </div>
           </div>
           <div className="px-6 my-4">
             <Separator />
           </div>
-          <div className="flex justify-between items-center px-6">
+          <div className="flex justify-between items-center md:px-6 px-2">
             <div>
               <h2 className=" text-lg">Contract Expiration Date</h2>
-              <p className="text-gray-500">
+              <p className="text-gray-500 md:text-base text-sm">
                 Your contract will remain active until this date.
               </p>
             </div>
