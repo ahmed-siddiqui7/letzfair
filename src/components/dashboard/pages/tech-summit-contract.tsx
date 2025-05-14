@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import BackButton from "../back-button";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import UserTable from "../table/usertable";
 import ExhibitorTable from "../table/exhibitortable";
 import {
@@ -20,6 +20,9 @@ export interface TechSummitContractProps {
 
 const TechSummitContract = ({ contractID }: TechSummitContractProps) => {
   const pathname = usePathname();
+  const params = useParams();
+  console.log("Project id", params.pid);
+  const projectId = params.pid;
 
   const userContract = [
     {

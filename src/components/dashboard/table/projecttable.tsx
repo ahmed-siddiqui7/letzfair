@@ -18,9 +18,13 @@ import { FiPlus } from "react-icons/fi";
 import { getProject, useProject } from "@/mutation/get-projects";
 import { TechSummitContractProps } from "../pages/tech-summit-contract";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const ProjectTable = ({ contractID }: TechSummitContractProps) => {
+  const params = useParams();
+  console.log("Project id", params.pid);
+  const projectId = params.pid;
+
   const router = useRouter();
   const [pagination, setpagination] = useState();
   const [page, setPage] = useState(0);

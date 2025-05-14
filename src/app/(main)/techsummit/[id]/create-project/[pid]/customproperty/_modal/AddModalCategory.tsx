@@ -23,8 +23,17 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { toast } from "sonner";
 import * as Yup from "yup";
+import {
+  CustomProjectType,
+  fieldType,
+  type,
+  useCustomProject,
+  visibility,
+} from "../_mutation/custom-property";
 
 const AddModalCategory = () => {
+  const { mutateAsync } = useCustomProject();
+
   const schema = Yup.object().shape({
     selectField: Yup.string().required("Field is required"),
     fieldlabel: Yup.string().required("Label is required"),
@@ -39,15 +48,25 @@ const AddModalCategory = () => {
       fieldlabel: "",
       jobtitle: "",
       visibility: "",
+      type: "",
     },
-    onSubmit: (values) => {
-      console.log("clicked");
-      console.log("all values", values);
-      formik.setFieldValue("selectField", "");
-      formik.setFieldValue("fieldlabel", "");
-      formik.setFieldValue("jobtitle", "");
-      formik.setFieldValue("visibility", "");
-      toast.success("Data Saved...");
+
+    onSubmit: async (values) => {
+      const payload: CustomProjectType = {
+        label: "Name",
+        placeholder: "Enter name",
+        fieldType: values.selectField as fieldType,
+        visibility: values.visibility as visibility,
+        type: values.visibility as type,
+      };
+
+      try {
+        await mutateAsync(payload);
+        toast.success("Data Saved...");
+      } catch (error) {
+        toast.error("API Error: " + error || "Unknown error");
+      }
+      formik.resetForm();
     },
   });
 
@@ -92,13 +111,11 @@ const AddModalCategory = () => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Short Text Field </SelectLabel>
-                    <SelectItem value="longtextfield">
-                      Long Text Field
-                    </SelectItem>
-                    <SelectItem value="Gallery">Gallery</SelectItem>
-                    <SelectItem value="Image">Image</SelectItem>
-                    <SelectItem value="File">File</SelectItem>
-                    <SelectItem value="Link">Link</SelectItem>
+                    <SelectItem value="long_text">Long Text Field</SelectItem>
+                    <SelectItem value="gallery">Gallery</SelectItem>
+                    <SelectItem value="image">Image</SelectItem>
+                    <SelectItem value="file">File</SelectItem>
+                    <SelectItem value="link">Link</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
