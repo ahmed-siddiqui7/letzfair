@@ -4,6 +4,7 @@ import TechSummitContract from "@/components/dashboard/pages/tech-summit-contrac
 import { getCookie, setCookie } from "cookies-next";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import { BeatLoader } from "react-spinners";
 
 const TechSummit = () => {
   const router = useRouter();
@@ -23,7 +24,11 @@ const TechSummit = () => {
   }, [cookie, contractId]);
 
   if (!contractId) {
-    return <div>Loading...</div>; // Prevent crash if ID is undefined
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <BeatLoader />
+      </div>
+    );
   }
 
   return (

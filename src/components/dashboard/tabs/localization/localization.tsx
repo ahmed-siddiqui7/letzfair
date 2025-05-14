@@ -23,7 +23,7 @@ const Localization = () => {
   return (
     <div>
       {/* TABS BUTTON */}
-      <div className="flex gap-4">
+      <div className="flex gap-4 md:justify-normal justify-center">
         <button
           className={` 
              ${

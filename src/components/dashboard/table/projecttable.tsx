@@ -188,6 +188,11 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
                     </td>
                     <td className="px-4 py-3 text-center">
                       <button
+                        onClick={() => {
+                          router.push(
+                            `${contractID}/create-project/${project.id}`
+                          );
+                        }}
                         className={
                           project.status && "Complete Setup"
                             ? "border px-2 py-1.5 rounded border-orange-400 text-orange-400 md:w-3/4 cursor-pointer w-full"

@@ -52,7 +52,7 @@ const StringTranslatorTable = () => {
     <div className="mt-10">
       <div className="bg-white border rounded-2xl py-2 mb-10">
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mb-6 px-6 pt-2">
-          <div className="w-1/3 relative">
+          <div className="md:w-1/3 w-full relative">
             <CiSearch className="absolute left-4  text-gray-400 text-2xl top-1.5" />
             <Input
               placeholder="Search"
@@ -61,7 +61,7 @@ const StringTranslatorTable = () => {
                focus:outline-none focus:ring-2 focus:ring-gray-300"
             />
           </div>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 md:justify-normal justify-center">
             <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5 cursor-pointer">
               <span>
                 <img src="/import.png" alt="" />
