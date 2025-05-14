@@ -35,7 +35,7 @@ const CustomPropertyTable = () => {
     <div>
       <div className="bg-white border rounded-2xl py-2 mb-10">
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4 mb-6 px-6 pt-2">
-          <div className="w-1/5 relative">
+          <div className="md:w-1/5 relative">
             <CiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
             <Input
               placeholder="Search"
@@ -157,7 +157,7 @@ const CustomPropertyTable = () => {
           </table>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
+        <div className="flex flex-row sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <span>Rows per page:</span>
             <select className=" rounded-md px-2 py-1 text-sm">

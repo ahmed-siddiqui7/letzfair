@@ -11,9 +11,14 @@ const CustomProperty = () => {
   };
 
   return (
-    <div className="px-24">
+    <div className="md:px-24 px-4">
       <div className="mt-10 mb-10">
-        <h1 className="text-4xl font-medium">Custom Property Management</h1>
+        <h1 className="md:text-4xl font-medium text-2xl">
+          Custom Property Management
+        </h1>
+        <p className="mt-2 text-gray-600">
+          Create and manage permission groups for Users, Exhibitors
+        </p>
       </div>
       <div className="mt-10 mb-8 flex space-x-8 relative">
         <button
