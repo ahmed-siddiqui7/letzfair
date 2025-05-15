@@ -1,15 +1,20 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
-import { getCookie, setCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
+import { useCreationStatus } from "../_query/creation-status";
 
 const CreateProject = () => {
   const router = useRouter();
   const cookie = getCookie("accessToken");
   const params = useParams();
-  console.log("params.pid", params.pid);
+  const contractId = params?.id ? Number(params?.id) : undefined;
+  const projectId = params?.pid ? Number(params?.pid) : undefined;
+
+  const { data } = useCreationStatus({ contractId, projectId });
+  console.log("Creation Status", data);
 
   console.log(cookie);
   useEffect(() => {
@@ -18,26 +23,10 @@ const CreateProject = () => {
     }
   }, []);
 
-  type Tabs = {
-    basicprojectinformation: boolean;
-    projectsetting: boolean;
-    createcustomproperty: boolean;
-    createtaxonomies: boolean;
-    chooseregistration: boolean;
-    addpermission: boolean;
-  };
-  const [tabs, settabs] = useState<Tabs>({
-    basicprojectinformation: false,
-    projectsetting: false,
-    createcustomproperty: false,
-    createtaxonomies: false,
-    chooseregistration: false,
-    addpermission: false,
-  });
-
   return (
     <div className="px-4 sm:px-6 md:px-12 lg:px-20 xl:px-28">
       <div className="mt-8 sm:mt-10 md:mt-12">
+        <h2 className="text-4xl">Iam child</h2>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium">
           Create Project
         </h1>
@@ -48,7 +37,7 @@ const CreateProject = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 px-4 sm:px-6 py-6">
           <FaCircleCheck
             className={`text-2xl ${
-              params.pid ? "text-blue-400" : "text-gray-400"
+              data?.basic_project_info ? "text-blue-400" : "text-gray-400"
             }`}
           />
           <div className="flex-1">
@@ -60,12 +49,7 @@ const CreateProject = () => {
           <button
             className="w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500 cursor-pointer"
             onClick={() => {
-              settabs((prev) => ({
-                ...prev,
-                basicprojectinformation: true,
-              }));
-              localStorage.setItem("projectTab", JSON.stringify(tabs));
-              router.push(`create-project/newproject`);
+              router.push(`createproject/newproject`);
             }}
           >
             Create
@@ -77,7 +61,7 @@ const CreateProject = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 px-4 sm:px-6 py-6">
           <FaCircleCheck
             className={`text-2xl ${
-              params.pid ? "text-blue-400" : "text-gray-400"
+              data?.project_settings ? "text-blue-400" : "text-gray-400"
             }`}
           />
           <div className="flex-1">
@@ -89,7 +73,7 @@ const CreateProject = () => {
           </div>
           <button
             onClick={() => {
-              router.push("create-project/projectsetting");
+              router.push("createproject/projectsetting");
             }}
             className="cursor-pointer w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500"
           >
@@ -101,7 +85,7 @@ const CreateProject = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 px-4 sm:px-6 py-6">
           <FaCircleCheck
             className={`text-2xl ${
-              params.pid ? "text-blue-400" : "text-gray-400"
+              data?.custom_properties ? "text-blue-400" : "text-gray-400"
             }`}
           />
           <div className="flex-1">
@@ -115,7 +99,7 @@ const CreateProject = () => {
           <button
             className="cursor-pointer w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500"
             onClick={() => {
-              router.push("create-project/customproperty");
+              router.push("createproject/customproperty");
             }}
           >
             Create Property
@@ -125,7 +109,11 @@ const CreateProject = () => {
 
         {/* Section 4 */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 px-4 sm:px-6 py-6">
-          <FaCircleCheck className="text-2xl text-gray-400" />
+          <FaCircleCheck
+            className={`text-2xl ${
+              data?.taxonomies ? "text-blue-400" : "text-gray-400"
+            }`}
+          />
           <div className="flex-1">
             <h2 className="text-lg sm:text-xl">Create Taxonomies (optional)</h2>
             <p className="text-sm sm:text-base text-[#666566]">
@@ -140,7 +128,11 @@ const CreateProject = () => {
 
         {/* Section 5 */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 px-4 sm:px-6 py-6">
-          <FaCircleCheck className="text-2xl text-gray-400" />
+          <FaCircleCheck
+            className={`text-2xl ${
+              data?.choose_registration ? "text-blue-400" : "text-gray-400"
+            }`}
+          />
           <div className="flex-1">
             <h2 className="text-lg sm:text-xl">Choose Registration Forms</h2>
             <p className="text-sm sm:text-base text-[#666566]">
@@ -155,7 +147,11 @@ const CreateProject = () => {
 
         {/* Section 6 */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 px-4 sm:px-6 py-6">
-          <FaCircleCheck className="text-2xl text-gray-400" />
+          <FaCircleCheck
+            className={`text-2xl ${
+              data?.add_permissions ? "text-blue-400" : "text-gray-400"
+            }`}
+          />
           <div className="flex-1">
             <h2 className="text-lg sm:text-xl">Add Permissions</h2>
             <p className="text-sm sm:text-base text-[#666566]">

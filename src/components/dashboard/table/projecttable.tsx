@@ -114,7 +114,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
             <button
               className="flex items-center gap-2 bg-[#166DFB] text-white px-2.5 py-1.5 rounded cursor-pointer"
               onClick={() => {
-                router.push(`/techsummit/${contractID}/create-project`);
+                router.push(`/techsummit/${contractID}/createproject`);
               }}
             >
               <FiPlus />
@@ -194,7 +194,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
                       <button
                         onClick={() => {
                           router.push(
-                            `${contractID}/create-project/${project.id}`
+                            `${contractID}/createproject/${project.id}`
                           );
                         }}
                         className={

@@ -16,22 +16,21 @@ import { cn } from "@/lib/utils";
 import { CalendarIcon, ImagePlus } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useNewProject } from "@/mutation/new-project";
 import axios from "axios";
-import { getCookie } from "cookies-next";
 
 const NewProject = () => {
   const { data, mutateAsync } = useNewProject();
-
+  const params = useParams();
   const inputRef = useRef<HTMLInputElement>(null);
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
-
   const [bannerFile, setBannerFile] = useState<File | string>();
 
   const router = useRouter();
-  const contractId = getCookie("contractId");
+  const contractId = params.id;
+  const projectId = Number(params.pid);
 
   const formik = useFormik({
     initialValues: {
@@ -62,7 +61,7 @@ const NewProject = () => {
 
         await mutateAsync(payload);
         toast.success("Data saved");
-        router.push(`/techsummit/${contractId}/create-project`);
+        router.push(`/techsummit/${contractId}/createproject`);
         console.log("values:", { values, bannerFile, startDate, endDate });
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -257,13 +256,14 @@ const NewProject = () => {
         <div className="mt-10 mb-20 sm:mb-28 flex flex-col sm:flex-row justify-end gap-3">
           <button
             type="button"
-            className="border border-blue-400 px-4 py-2 rounded text-blue-400 w-full sm:w-auto"
+            className="border border-blue-400 px-4 py-2 rounded text-blue-400 w-full sm:w-auto cursor-pointer"
+            onClick={() => router.back()}
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="border bg-blue-400 px-4 py-2 rounded text-white w-full sm:w-auto"
+            className="border bg-blue-400 px-4 py-2 rounded text-white w-full sm:w-auto cursor-pointer"
           >
             Save
           </button>

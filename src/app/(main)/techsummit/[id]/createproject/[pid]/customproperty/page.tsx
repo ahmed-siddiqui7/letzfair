@@ -1,13 +1,22 @@
 "use client";
 import { useState } from "react";
-import CustomPropertyTable from "./_table/custompropertytable";
+import CustomPropertyTable from "./_table/custom-property-table";
 
-type ButtonValueType = string;
+type ButtonValueType = string | undefined;
+
+enum PropertyType {
+  attendee = "attendee",
+  exhibitor_manager = "exhibitor_manager",
+  session = "session",
+}
+
 const CustomProperty = () => {
-  const [tabs, setTabs] = useState<string>("Attendee");
+  const [types, setTypes] = useState<PropertyType | undefined>(
+    PropertyType.attendee
+  );
 
-  const handleBtnTabs = (val: ButtonValueType) => {
-    setTabs(val);
+  const handleBtnTabs = (val: PropertyType) => {
+    setTypes(val);
   };
 
   return (
@@ -23,9 +32,9 @@ const CustomProperty = () => {
       <div className="mt-10 mb-8 flex space-x-8 relative">
         <button
           type="button"
-          onClick={() => handleBtnTabs("Attendee")}
+          onClick={() => handleBtnTabs(PropertyType.attendee)}
           className={`cursor-pointer  ${
-            tabs === "Attendee"
+            types === PropertyType.attendee && "attendee"
               ? "border-b-[#166DFB] border-b-2 relative text-[#166DFB] pb-1"
               : "border-b-0 text-gray-400 pb-1"
           }`}
@@ -34,9 +43,9 @@ const CustomProperty = () => {
         </button>
         <button
           type="button"
-          onClick={() => handleBtnTabs("Exhibitor")}
+          onClick={() => handleBtnTabs(PropertyType.exhibitor_manager)}
           className={`cursor-pointer  ${
-            tabs === "Exhibitor"
+            types === PropertyType.exhibitor_manager && "exhibitor_manager"
               ? "border-b-[#166DFB] border-b-2 relative text-[#166DFB] pb-1"
               : "border-b-0 text-gray-400 pb-1"
           }`}
@@ -45,9 +54,9 @@ const CustomProperty = () => {
         </button>
         <button
           type="button"
-          onClick={() => handleBtnTabs("Session")}
+          onClick={() => handleBtnTabs(PropertyType.session)}
           className={`cursor-pointer  ${
-            tabs === "Session"
+            types === PropertyType.session && "session"
               ? "border-b-[#166DFB] border-b-2 relative text-[#166DFB] pb-1"
               : "border-b-0 text-gray-400 pb-1"
           }`}
@@ -56,7 +65,7 @@ const CustomProperty = () => {
         </button>
       </div>
       <div>
-        <CustomPropertyTable />
+        <CustomPropertyTable types={types} />
       </div>
     </div>
   );

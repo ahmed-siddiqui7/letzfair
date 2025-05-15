@@ -11,11 +11,20 @@ import { CiSearch } from "react-icons/ci";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FiPlus } from "react-icons/fi";
-import CancelModal from "../_modal/CancelModal";
-import { useState } from "react";
-import AddModalCategory from "../_modal/AddModalCategory";
+import CancelModal from "../_modal/cancel-modal";
+import { useEffect, useState } from "react";
+import AddModalCategory from "../_modal/add-modal-category";
+import { useGetProperty } from "../_query/get-property";
+import { useParams } from "next/navigation";
 
-const CustomPropertyTable = () => {
+const CustomPropertyTable = ({ types }: { types: string | undefined }) => {
+  const params = useParams();
+  console.log("Custom property Table", types);
+  const contractId = params.id ? Number(params.id) : undefined;
+  const projectId = params.pid ? Number(params.pid) : undefined;
+
+  console.log({ contractId, projectId });
+
   const [addNewProperty, setAddNewProperty] = useState({
     selectField: "",
     enterFieldLabel: "",
@@ -30,6 +39,13 @@ const CustomPropertyTable = () => {
       noOfManager: "1",
     },
   ];
+
+  useEffect(() => {
+    if (projectId) {
+      const { data } = useGetProperty({ contractId, projectId });
+      console.log("get property", data);
+    }
+  }, []);
 
   return (
     <div>
@@ -85,7 +101,7 @@ const CustomPropertyTable = () => {
               </SelectContent>
             </Select>
             {/* ADD NEW PROPERTY */}
-            <AddModalCategory />
+            <AddModalCategory types={types} />
           </div>
         </div>
         <div className="overflow-x-auto border">
@@ -99,29 +115,25 @@ const CustomPropertyTable = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {contracts.length === 0 ? (
+              {!projectId || contracts.length === 0 ? (
                 <tr>
-                  <td colSpan={4}>
+                  <td colSpan={5}>
                     <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
                       <img
                         src="/noproject.png"
                         alt="No contracts"
-                        className="w-90 h-70 mb-4 object-cover"
+                        className="w-90 h-50 mb-4 object-contain"
                       />
-                      <h1 className="text-xl font-semibold">
+                      <h1 className="text-2xl font-semibold mt-1 text-black">
                         No Custom Properties Created Yet
                       </h1>
-                      <p className="text-wrap">
+                      <p className="text-wrap mt-1 mb-2">
                         Create custom properties to tailor this entity to your
                         project needs. Start by adding fields that enhance
                         flexibility and control.
                       </p>
-                      <button className="flex items-center">
-                        <span>
-                          <FiPlus />
-                        </span>
-                        <span>Add Custom Property</span>
-                      </button>
+                      {/* ADD NEW PROPERTY */}
+                      <AddModalCategory types={types} />
                     </div>
                   </td>
                 </tr>

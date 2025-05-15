@@ -31,7 +31,9 @@ import {
   visibility,
 } from "../_mutation/custom-property";
 
-const AddModalCategory = () => {
+const AddModalCategory = ({ types }: { types: string | undefined }) => {
+  console.log("Add Modal Category Props", types);
+
   const { mutateAsync } = useCustomProject();
 
   const schema = Yup.object().shape({
@@ -48,7 +50,7 @@ const AddModalCategory = () => {
       fieldlabel: "",
       jobtitle: "",
       visibility: "",
-      type: "",
+      type: types,
     },
 
     onSubmit: async (values) => {
@@ -57,7 +59,7 @@ const AddModalCategory = () => {
         placeholder: "Enter name",
         fieldType: values.selectField as fieldType,
         visibility: values.visibility as visibility,
-        type: values.visibility as type,
+        type: values.type as type,
       };
 
       try {
@@ -82,7 +84,6 @@ const AddModalCategory = () => {
         <DialogTitle />
         <DialogDescription />
       </DialogHeader>
-
       <DialogContent className="w-full sm:max-w-[500px] px-4">
         <form onSubmit={formik.handleSubmit}>
           <div className="flex flex-col">
