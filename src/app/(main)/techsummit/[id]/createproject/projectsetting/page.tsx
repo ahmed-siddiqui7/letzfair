@@ -1,5 +1,6 @@
 "use client";
-import ProjectSetting from "../../_views/project-setting";
+
+import ProjectSetting from "../_views/project-setting";
 
 const ProjectSettingPage = () => {
   return (

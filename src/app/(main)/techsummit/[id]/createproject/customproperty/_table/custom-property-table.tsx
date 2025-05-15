@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Select,
@@ -39,13 +41,8 @@ const CustomPropertyTable = ({ types }: { types: string | undefined }) => {
       noOfManager: "1",
     },
   ];
-
-  useEffect(() => {
-    if (projectId) {
-      const { data } = useGetProperty({ contractId, projectId });
-      console.log("get property", data);
-    }
-  }, []);
+  const { data } = useGetProperty({ contractId, projectId });
+  console.log("get property", data);
 
   return (
     <div>

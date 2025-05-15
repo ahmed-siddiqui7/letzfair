@@ -1,13 +1,13 @@
+"use client";
 import React from "react";
-import CreateProject from "./[pid]/page";
+import CreateProject from "./_component/create-project";
 
-const CreateProjectNoId = () => {
+const CreateProjectPage = () => {
   return (
     <div>
-      <h2 className="text-4xl">I am main</h2>
       <CreateProject />
     </div>
   );
 };
 
-export default CreateProjectNoId;
+export default CreateProjectPage;
