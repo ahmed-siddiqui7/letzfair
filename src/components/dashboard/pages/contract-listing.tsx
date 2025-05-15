@@ -17,6 +17,7 @@ import {
   useContract,
 } from "@/mutation/get-contracts";
 import { Skeleton } from "@/components/ui/skeleton";
+import FiveColumnSkeleton from "../FiveColumnSkeleton";
 
 const ContractListing = () => {
   const [fromDate, setFromDate] = useState<Date | undefined>(
@@ -103,13 +104,7 @@ const ContractListing = () => {
               {isLoading ? (
                 <tr>
                   <td colSpan={5}>
-                    <div className="space-y-4">
-                      <Skeleton className="h-5 w-full" />
-                      <Skeleton className="h-5 w-full" />
-                      <Skeleton className="h-5 w-full" />
-                      <Skeleton className="h-5 w-full" />
-                      <Skeleton className="h-5 w-full" />
-                    </div>
+                    <FiveColumnSkeleton />
                   </td>
                 </tr>
               ) : (

@@ -41,7 +41,7 @@ const CustomPropertyTable = ({ types }: { types: string | undefined }) => {
       noOfManager: "1",
     },
   ];
-  const { data } = useGetProperty({ contractId, projectId });
+  const { data, isLoading } = useGetProperty({ contractId, projectId });
   console.log("get property", data);
 
   return (
@@ -112,7 +112,7 @@ const CustomPropertyTable = ({ types }: { types: string | undefined }) => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-gray-700">
-              {!projectId || contracts.length === 0 ? (
+              {!projectId || data?.customProperties?.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
                     <div className="flex flex-col items-center justify-center py-16 text-center text-gray-500">
@@ -135,14 +135,14 @@ const CustomPropertyTable = ({ types }: { types: string | undefined }) => {
                   </td>
                 </tr>
               ) : (
-                contracts.map((contract, i) => (
+                data?.customProperties.map((value: any, i: any) => (
                   <tr key={i} className="hover:bg-gray-50">
                     <td className="px-4 py-4 font-medium flex items-center gap-2">
                       <input type="checkbox" />
-                      {contract.name}
+                      {value.label}
                     </td>
-                    <td className="px-4 py-4">{contract.createdOn}</td>
-                    <td className="px-4 py-4">{contract.noOfManager}</td>
+                    <td className="px-4 py-4">{value.field_type}</td>
+                    <td className="px-4 py-4">{value.visibility}</td>
                     <td className="px-4 py-4 flex space-x-4 justify-center">
                       <button>
                         <img
@@ -187,7 +187,7 @@ const CustomPropertyTable = ({ types }: { types: string | undefined }) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-end space-x-3">
+      <div className="flex justify-end space-x-3 mb-10">
         <CancelModal />
         <button className="px-10 py-2 bg-[#166DFB] text-white rounded cursor-pointer">
           Save

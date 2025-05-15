@@ -48,11 +48,11 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
     contractId: contractID,
     page: 1,
     limit: 20,
-    end_date: "",
+    end_date: toDate,
     search: search,
     sortBy: "",
     sortOrder: "",
-    start_date: "",
+    start_date: fromDate,
     status: "",
   });
   const [projectData, setProjectData] = useState<Project[] | undefined>([]);
@@ -175,10 +175,18 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
               ) : (
                 projectData?.map((project) => (
                   <tr key={project.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium">{project.name}</td>
-                    <td className="px-4 py-3">{project.start_date}</td>
-                    <td className="px-4 py-3">{project.end_date}</td>
-                    <td className="px-4 py-3">{project.location}</td>
+                    <td className="px-4 py-3 font-medium">
+                      {project.name ? project.name : "N/A"}
+                    </td>
+                    <td className="px-4 py-3">
+                      {project.start_date ? project.start_date : "N/A"}
+                    </td>
+                    <td className="px-4 py-3">
+                      {project.end_date ? project.end_date : "N/A"}
+                    </td>
+                    <td className="px-4 py-3">
+                      {project.location ? project.location : "N/A"}
+                    </td>
                     <td className="px-4 py-3">
                       <span
                         className={
@@ -187,7 +195,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
                             : "bg-green-100 px-1.5 py-1 rounded text-green-400"
                         }
                       >
-                        {project.status}
+                        {project.status ? project.status : "N/A"}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-center">
@@ -213,7 +221,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
           </table>
         </div>
 
-        {/* <div className="flex flex-col sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
+        <div className="flex flex-col sm:flex-row items-center justify-end px-2 py-4 gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <span>Rows per page:</span>
             <select
@@ -240,7 +248,7 @@ const ProjectTable = ({ contractID }: TechSummitContractProps) => {
               </Button>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

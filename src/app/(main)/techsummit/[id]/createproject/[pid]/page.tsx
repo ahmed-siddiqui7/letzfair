@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import CreateProject from "../_component/create-project";
+import CreateProject from "../_views/create-project";
 
 const CreateProjectPage = () => {
   return (
