@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { FaRegEdit } from "react-icons/fa";
+import EditStringModal from "../../edit-string-modal";
+import ImportStringModal from "../../import-string-modal";
 
 const StringTranslatorTable = () => {
   const stringdata = [
@@ -62,15 +64,11 @@ const StringTranslatorTable = () => {
             />
           </div>
           <div className="flex flex-wrap gap-4 md:justify-normal justify-center">
+            <ImportStringModal />
+
             <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5 cursor-pointer">
               <span>
-                <img src="/import.png" alt="" />
-              </span>
-              <span>Import</span>
-            </button>
-            <button className="border px-4 py-2 rounded-2xl flex items-center gap-1.5 cursor-pointer">
-              <span>
-                <img src="/export.png" alt="" />
+                <img src="/exporticon.png" alt="" />
               </span>
               <span>Export</span>
             </button>
@@ -118,9 +116,11 @@ const StringTranslatorTable = () => {
                       {data.noOfManager}
                     </td>
                     <td className="px-4 py-4 text-center">
-                      <button>
+                      {/* <button>
                         <FaRegEdit className="rounded size-5 cursor-pointer" />
-                      </button>
+                      </button> */}
+
+                      <EditStringModal />
                     </td>
                   </tr>
                 ))

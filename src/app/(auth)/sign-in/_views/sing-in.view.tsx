@@ -8,11 +8,16 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import * as Yup from "yup";
 import { BeatLoader } from "react-spinners";
+import { useUserContext } from "@/context/user";
+import { useUserDetails } from "../_query/user-details";
 
 const SignInView = () => {
   const { isPending, mutateAsync } = useSignIn();
   const router = useRouter();
   const existsToken = hasCookie("accessToken");
+  // CUSTOM HOOKS
+  // const { user, setuserDetails } = useUserContext();
+  // const { data: userDetails, isLoading } = useUserDetails();
 
   const formik = useFormik({
     initialValues: {
@@ -28,6 +33,7 @@ const SignInView = () => {
         onSuccess: (data) => {
           if (data) {
             console.log("Sign In", data);
+            // setuserDetails(userDetails);
             setCookie("accessToken", data.accessToken);
             router.push("/");
             toast.success("Logged In");

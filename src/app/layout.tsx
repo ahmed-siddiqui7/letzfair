@@ -4,6 +4,7 @@ import "./globals.css";
 import ReactQueryProvider from "@/utils/Providers/ReactQueryProvider";
 import { Toaster } from "@/components/ui/sonner";
 import "react-day-picker/dist/style.css";
+import { UserProvider } from "@/context/user";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,10 +31,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FEFCFE]`}
       >
-        <ReactQueryProvider>
-          {children}
-          <Toaster />
-        </ReactQueryProvider>
+        <UserProvider>
+          <ReactQueryProvider>
+            {children}
+            <Toaster />
+          </ReactQueryProvider>
+        </UserProvider>
       </body>
     </html>
   );
