@@ -143,7 +143,20 @@ const CreateProject = () => {
               Create custom properties to collect specific details
             </p>
           </div>
-          <button className="cursor-pointer w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500">
+          <button
+            onClick={() => {
+              router.push(
+                `${
+                  projectId
+                    ? projectId
+                    : !projectId
+                    ? "createproject"
+                    : "/createproject"
+                }/taxonomy`
+              );
+            }}
+            className="cursor-pointer w-full md:w-auto border-blue-500 px-4 py-2 border rounded text-blue-500"
+          >
             Create Property
           </button>
         </div>
